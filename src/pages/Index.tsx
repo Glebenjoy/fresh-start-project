@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Eye } from "lucide-react";
+import { User, Session } from "@supabase/supabase-js";
+import { supabase } from "@/integrations/supabase/client";
 import DreamInput from "@/components/dream/DreamInput";
 import ProcessingScreen from "@/components/dream/ProcessingScreen";
 import DreamResult from "@/components/dream/DreamResult";
+import AuthModal from "@/components/auth/AuthModal";
 import { 
   analyzeDream, 
   getSessionId, 
@@ -16,6 +19,57 @@ type AppState = "input" | "processing" | "result";
 const Index = () => {
   const [appState, setAppState] = useState<AppState>("input");
   const [dreamResult, setDreamResult] = useState<DreamAnalysisResult | null>(null);
+  const [user, setUser] = useState<User | null>(null);
+  const [session, setSession] = useState<Session | null>(null);
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [isUnlocked, setIsUnlocked] = useState(false);
+  const [currentDreamId, setCurrentDreamId] = useState<string | null>(null);
+
+  // Auth state listener
+  useEffect(() => {
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setSession(session);
+        setUser(session?.user ?? null);
+
+        // If user just signed in and we have a pending dream, unlock it
+        if (event === "SIGNED_IN" && session?.user) {
+          setIsAuthModalOpen(false);
+          setIsUnlocked(true);
+          
+          // Link dream to user in database
+          if (currentDreamId) {
+            setTimeout(() => {
+              linkDreamToUser(currentDreamId, session.user.id);
+            }, 0);
+          }
+        }
+      }
+    );
+
+    // Check for existing session
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session);
+      setUser(session?.user ?? null);
+      if (session?.user) {
+        setIsUnlocked(true);
+      }
+    });
+
+    return () => subscription.unsubscribe();
+  }, [currentDreamId]);
+
+  const linkDreamToUser = async (dreamId: string, userId: string) => {
+    try {
+      await supabase
+        .from("dreams")
+        .update({ user_id: userId })
+        .eq("id", dreamId);
+      console.log("Dream linked to user successfully");
+    } catch (error) {
+      console.error("Failed to link dream to user:", error);
+    }
+  };
 
   const handleDreamSubmit = async (text: string) => {
     setAppState("processing");
@@ -24,7 +78,13 @@ const Index = () => {
       const sessionId = getSessionId();
       const result = await analyzeDream(text, sessionId);
       setDreamResult(result);
+      setCurrentDreamId(result.id || null);
       setAppState("result");
+      
+      // If user is already logged in, unlock immediately
+      if (user) {
+        setIsUnlocked(true);
+      }
     } catch (error) {
       console.error("Dream analysis failed:", error);
       setAppState("input");
@@ -35,7 +95,17 @@ const Index = () => {
     clearSavedResult();
     clearSavedDreamText();
     setDreamResult(null);
+    setCurrentDreamId(null);
+    setIsUnlocked(user !== null); // Keep unlocked if user is logged in
     setAppState("input");
+  };
+
+  const handleUnlockClick = () => {
+    if (user) {
+      setIsUnlocked(true);
+    } else {
+      setIsAuthModalOpen(true);
+    }
   };
 
   return (
@@ -83,7 +153,9 @@ const Index = () => {
           {appState === "result" && dreamResult && (
             <DreamResult 
               result={dreamResult} 
-              onReset={handleReset} 
+              onReset={handleReset}
+              isUnlocked={isUnlocked}
+              onUnlockClick={handleUnlockClick}
             />
           )}
         </main>
@@ -95,6 +167,12 @@ const Index = () => {
           </p>
         </footer>
       </div>
+
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)} 
+      />
     </div>
   );
 };

@@ -3,6 +3,7 @@
 // TODO: Connect to n8n webhook in production
 
 export interface DreamAnalysisResult {
+  id?: string;
   title: string;
   hook_text: string;
   full_analysis: string;
@@ -73,6 +74,7 @@ export const analyzeDream = async (
   
   // MOCK DATA for UI testing
   const mockResult: DreamAnalysisResult = {
+    id: crypto.randomUUID(),
     title: "The Amber Void",
     hook_text: "You are standing on the edge of a great change. The silence in your dream screams of unspoken decisions.",
     full_analysis: "This dream reflects a deep internal conflict regarding your recent choices. The void represents the unknown potential of your future. The amber color symbolizes a warm, yet cautionary energy — your subconscious is urging you to proceed with awareness. Jung would interpret this as a confrontation with your Shadow: the parts of yourself you have yet to acknowledge. The silence is not emptiness, but rather a space waiting to be filled by your conscious decisions.",

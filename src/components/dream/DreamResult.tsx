@@ -1,13 +1,15 @@
 import { DreamAnalysisResult } from "@/services/dreamService";
-import { Share2, Lock, RotateCcw } from "lucide-react";
+import { Share2, Lock, RotateCcw, Unlock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 interface DreamResultProps {
   result: DreamAnalysisResult;
   onReset: () => void;
+  isUnlocked: boolean;
+  onUnlockClick: () => void;
 }
 
-const DreamResult = ({ result, onReset }: DreamResultProps) => {
+const DreamResult = ({ result, onReset, isUnlocked, onUnlockClick }: DreamResultProps) => {
   return (
     <div className="w-full max-w-lg mx-auto space-y-6 animate-fade-in-up">
       {/* Dream Image - Full clarity */}
@@ -38,36 +40,49 @@ const DreamResult = ({ result, onReset }: DreamResultProps) => {
         </div>
       </div>
 
-      {/* Analysis Card - Blurred hook */}
+      {/* Analysis Card */}
       <div className="glass rounded-3xl p-6 space-y-4">
-        {/* Hook text - Visible */}
+        {/* Hook text - Always Visible */}
         <p className="text-foreground/90 text-lg leading-relaxed font-medium">
           "{result.hook_text}"
         </p>
 
-        {/* Full analysis - Blurred */}
+        {/* Full analysis */}
         <div className="relative">
-          <p className="text-muted-foreground leading-relaxed blur-reveal">
+          <p className={`text-muted-foreground leading-relaxed transition-all duration-500 ${
+            isUnlocked ? "" : "blur-reveal"
+          }`}>
             {result.full_analysis}
           </p>
           
-          {/* Unlock overlay */}
-          <div className="absolute inset-0 flex items-center justify-center
-                          bg-gradient-to-t from-card via-card/80 to-transparent
-                          pt-12">
-            <Button
-              className="rounded-2xl px-6 py-6 h-auto
-                         bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500
-                         hover:from-amber-400 hover:via-amber-300 hover:to-amber-400
-                         text-primary-foreground font-medium text-base
-                         shadow-lg hover:shadow-[0_0_30px_hsl(45_100%_50%/0.3)]
-                         transition-all duration-300"
-            >
-              <Lock size={18} strokeWidth={1.5} className="mr-2" />
-              Unlock Full Analysis
-            </Button>
-          </div>
+          {/* Unlock overlay - only shown when locked */}
+          {!isUnlocked && (
+            <div className="absolute inset-0 flex items-center justify-center
+                            bg-gradient-to-t from-card via-card/80 to-transparent
+                            pt-12">
+              <Button
+                onClick={onUnlockClick}
+                className="rounded-2xl px-6 py-6 h-auto
+                           bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500
+                           hover:from-amber-400 hover:via-amber-300 hover:to-amber-400
+                           text-primary-foreground font-medium text-base
+                           shadow-lg hover:shadow-[0_0_30px_hsl(45_100%_50%/0.3)]
+                           transition-all duration-300"
+              >
+                <Lock size={18} strokeWidth={1.5} className="mr-2" />
+                Unlock Full Analysis
+              </Button>
+            </div>
+          )}
         </div>
+
+        {/* Unlocked indicator */}
+        {isUnlocked && (
+          <div className="flex items-center gap-2 text-amber-400 text-sm pt-2">
+            <Unlock size={14} strokeWidth={1.5} />
+            <span>Full analysis unlocked</span>
+          </div>
+        )}
       </div>
 
       {/* New dream button */}
