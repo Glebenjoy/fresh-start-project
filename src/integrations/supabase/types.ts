@@ -14,7 +14,51 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      dreams: {
+        Row: {
+          archetypes: string[] | null
+          content_text: string
+          created_at: string | null
+          emotions: string[] | null
+          id: string
+          image_url: string | null
+          interpretation_full: string | null
+          interpretation_preview: string | null
+          language: string | null
+          session_id: string | null
+          title: string | null
+          user_id: string | null
+        }
+        Insert: {
+          archetypes?: string[] | null
+          content_text: string
+          created_at?: string | null
+          emotions?: string[] | null
+          id?: string
+          image_url?: string | null
+          interpretation_full?: string | null
+          interpretation_preview?: string | null
+          language?: string | null
+          session_id?: string | null
+          title?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          archetypes?: string[] | null
+          content_text?: string
+          created_at?: string | null
+          emotions?: string[] | null
+          id?: string
+          image_url?: string | null
+          interpretation_full?: string | null
+          interpretation_preview?: string | null
+          language?: string | null
+          session_id?: string | null
+          title?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
