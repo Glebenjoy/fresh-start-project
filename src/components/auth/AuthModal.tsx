@@ -16,12 +16,12 @@ interface AuthModalProps {
 const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
   return (
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
-      <DialogContent className="glass border-white/10 bg-black/90 backdrop-blur-xl sm:max-w-md">
+      <DialogContent className="glass border-white/10 bg-black/95 backdrop-blur-xl sm:max-w-md">
         <DialogHeader className="text-center">
-          <DialogTitle className="font-display text-2xl text-gradient-amber">
-            Save your vision forever.
+          <DialogTitle className="font-sans text-2xl font-bold bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+            Unlock Your Vision
           </DialogTitle>
-          <p className="text-muted-foreground text-sm mt-2">
+          <p className="text-[#94A3B8] text-sm mt-2">
             Create an account to unlock the full analysis and keep your dream journal.
           </p>
         </DialogHeader>
@@ -34,9 +34,9 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
               variables: {
                 default: {
                   colors: {
-                    brand: "hsl(45, 100%, 50%)",
-                    brandAccent: "hsl(45, 100%, 40%)",
-                    brandButtonText: "hsl(0, 0%, 0%)",
+                    brand: "hsl(270, 80%, 60%)",
+                    brandAccent: "hsl(280, 80%, 50%)",
+                    brandButtonText: "hsl(0, 0%, 100%)",
                     defaultButtonBackground: "hsl(0, 0%, 10%)",
                     defaultButtonBackgroundHover: "hsl(0, 0%, 15%)",
                     defaultButtonBorder: "hsl(0, 0%, 20%)",
@@ -44,15 +44,15 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                     dividerBackground: "hsl(0, 0%, 20%)",
                     inputBackground: "hsl(0, 0%, 5%)",
                     inputBorder: "hsl(0, 0%, 20%)",
-                    inputBorderHover: "hsl(45, 100%, 50%)",
-                    inputBorderFocus: "hsl(45, 100%, 50%)",
+                    inputBorderHover: "hsl(270, 80%, 60%)",
+                    inputBorderFocus: "hsl(280, 80%, 60%)",
                     inputText: "hsl(0, 0%, 95%)",
                     inputLabelText: "hsl(0, 0%, 70%)",
                     inputPlaceholder: "hsl(0, 0%, 40%)",
                     messageText: "hsl(0, 0%, 95%)",
                     messageTextDanger: "hsl(0, 84%, 60%)",
-                    anchorTextColor: "hsl(45, 100%, 50%)",
-                    anchorTextHoverColor: "hsl(45, 100%, 60%)",
+                    anchorTextColor: "hsl(280, 80%, 65%)",
+                    anchorTextHoverColor: "hsl(320, 80%, 65%)",
                   },
                   space: {
                     spaceSmall: "4px",
@@ -70,8 +70,8 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                     inputBorderWidth: "1px",
                   },
                   radii: {
-                    borderRadiusButton: "12px",
-                    buttonBorderRadius: "12px",
+                    borderRadiusButton: "9999px",
+                    buttonBorderRadius: "9999px",
                     inputBorderRadius: "12px",
                   },
                   fonts: {
