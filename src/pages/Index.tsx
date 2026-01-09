@@ -10,7 +10,9 @@ import {
   getSessionId, 
   DreamAnalysisResult,
   clearSavedResult,
-  clearSavedDreamText
+  clearSavedDreamText,
+  getSavedDreamResult,
+  getSavedDreamText
 } from "@/services/dreamService";
 
 type AppState = "input" | "processing" | "result";
@@ -23,6 +25,21 @@ const Index = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [currentDreamId, setCurrentDreamId] = useState<string | null>(null);
+
+  // Restore state from localStorage on mount
+  useEffect(() => {
+    const savedResult = getSavedDreamResult();
+    const savedDreamText = getSavedDreamText();
+    
+    if (savedResult) {
+      setDreamResult(savedResult);
+      setCurrentDreamId(savedResult.id || null);
+      setAppState("result");
+    } else if (savedDreamText) {
+      // User had typed but not submitted - stay on input
+      setAppState("input");
+    }
+  }, []);
 
   // Auth state listener
   useEffect(() => {
