@@ -1,41 +1,67 @@
-# Design Guidelines: Visura AI (Deep Glass)
+# Design Guidelines: Visura AI (Ultra Detail)
 
 ## 🎨 Philosophy
-**"Cinematic Void"**. Мы отказываемся от "мыльного" глассморфизма в стиле iOS.
-Наш стиль: Глубокий черный фон, высокая резкость, минимализм.
-Интерфейс должен быть "невидимым", чтобы внимание было приковано к Логотипу и Картинкам снов.
+**"Holographic Void"**. Интерфейс — это глубокий космос (Deep Space), в котором живут живые, светящиеся объекты.
+Никакого плоского пластика. Всё должно двигаться, дышать и реагировать на курсор.
+Главное правило: **High Contrast & Motion**.
 
-## 🛠 Tech Implementation Specs
-*   **Icons:** `lucide-react`. Use `strokeWidth={1.5}`. Color: White.
-*   **Fonts:** `Inter` or `Geist Sans` (Clean, Modern, Tech). No Serifs.
+## 🛠 Tech Stack (Strict)
+*   **Icons:** `lucide-react`. Stroke: `1.5px` (Thin).
+*   **Fonts:** `Inter` (Google Fonts).
+*   **Animation:** `framer-motion` (Crucial for smooth entry/exit).
 *   **Styling:** Tailwind CSS.
 
-## 🌈 Color Palette
+## 🌈 The Atmosphere (Background)
+The background is NOT static. It must look like a living aura.
+*   **Base:** `#000000` (Pure Black).
+*   **The Aurora:** Use large, blurred blobs (`blur-[120px]`) positioned absolutely behind the content.
+    *   Color 1: `bg-indigo-600/20` (Top Left).
+    *   Color 2: `bg-fuchsia-600/10` (Bottom Right).
+    *   *Animation:* These blobs should slowly float (`animate-pulse` or custom float animation).
 
-### Backgrounds
-*   **Global Background:** Pure Black (`#000000`). No gradients.
-*   **Surface (Cards/Inputs):** `#0A0A0A` (Almost black).
-*   **Borders:** `border-white/10` (Very subtle).
+## 🧩 Component Library
 
-### Accents (The Light)
-*   **Primary Button:**
-    *   Background: White (`#FFFFFF`).
-    *   Text: Black (`#000000`).
-    *   Effect: On hover, show a subtle "Prism" shadow (`shadow-[0_0_20px_rgba(255,255,255,0.3)]`).
-*   **Secondary Elements:** Cool Grey (`#A1A1AA`).
+### 1. Primary Action Button (The "Visualize" Capsule)
+This is the most important element on the screen.
+*   **Shape:** Full Capsule (`rounded-full`).
+*   **Background:** Holographic Gradient:
+    *   `bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500`.
+*   **Text:** White, Bold (`font-semibold`), Tracking wide.
+*   **Interaction (Hover):**
+    *   Scale up slightly (`scale-105`).
+    *   Increase brightness (`brightness-110`).
+    *   Shadow bloom: `shadow-[0_0_20px_rgba(168,85,247,0.5)]`.
+*   **Interaction (Click):** Scale down (`scale-95`).
 
-## 📱 UI Components
+### 2. The Input Field (Stealth Mode)
+Don't create a "box". Let the user type into the void.
+*   **Background:** Transparent (`bg-transparent`).
+*   **Border:** None initially. Bottom border ONLY on focus.
+*   **Text:** Huge (`text-2xl`), Centered, White.
+*   **Placeholder:** `#FFFFFF/20` (Subtle).
+*   **Cursor:** Fluorescent Pink or Indigo (`caret-pink-500`).
 
-### 1. Minimalist Input
-*   Background: Transparent.
-*   Border: Bottom only (`border-b border-white/20`).
-*   Typography: Large text, Thin font weight.
-*   *Idea:* It should look like a command line or a clean whisper input.
+### 3. Glass Cards (Containers)
+*   **Bg:** `bg-zinc-900/40` (Darker glass).
+*   **Border:** `border-white/5` (Barely visible).
+*   **Backdrop:** `backdrop-blur-xl`.
+*   **Radius:** `rounded-3xl`.
 
-### 2. The Result Card
-*   Sharp corners (`rounded-lg`, not `rounded-3xl` - less "bubbly").
-*   No background color, just the Image.
-*   Text below the image: Clean, simple, readable.
+## ⏳ The Loading Experience (Hypnotic)
+**Concept:** "Neural Synthesis". Do not use a spinner.
+1.  **Visual:** A central "Orb" composed of multiple spinning rings or a breathing gradient circle. It should cycle through the logo colors (Indigo -> Cyan -> Pink).
+2.  **Text:** Instead of random facts, show "System Operations" to make it feel techy:
+    *   *"Connecting to subconscious..."*
+    *   *"Detecting emotional patterns..."*
+    *   *"Weaving visual textures..."*
+    *   *"Rendering high-fidelity dreamscape..."*
+3.  **Speed:** Text changes every 800ms (fast, dynamic).
 
-### 3. Glass Elements (Restricted)
-Use `backdrop-blur` ONLY for sticky elements (like the top navigation bar or floating modals). Everything else should be solid black for maximum contrast.
+## 📱 Typography Hierarchy
+*   **H1 (Logo Title):** `Inter`, ExtraBold (800), Tracking `-0.05em`. Gradient Text (White to Grey).
+*   **H2 (Headlines):** `Inter`, SemiBold (600). White.
+*   **Body:** `Inter`, Regular (400). Color: `#94A3B8` (Cool Grey).
+
+## 🖱 Micro-Interactions
+*   **Page Load:** All elements must `fade-in-up` (opacity 0 -> 1, y 20 -> 0) with staggered delays.
+*   **Result Reveal:** When the image loads, do not just "show" it. Reveal it slowly with a blur-to-sharp transition (`blur-lg` -> `blur-0`).
