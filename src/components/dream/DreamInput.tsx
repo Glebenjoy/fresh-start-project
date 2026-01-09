@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
 import { Sparkles, Mic } from "lucide-react";
 
 interface DreamInputProps {
@@ -17,51 +16,56 @@ const DreamInput = ({ onSubmit, isLoading }: DreamInputProps) => {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto space-y-6 animate-fade-in">
-      {/* Minimalist textarea */}
+    <div className="w-full max-w-xl mx-auto space-y-8 animate-fade-in">
+      {/* Stealth Mode Input - Typing into the void */}
       <div className="relative">
         <Textarea
           value={dreamText}
           onChange={(e) => setDreamText(e.target.value)}
           placeholder="Describe your dream..."
-          className="min-h-[160px] bg-transparent border-0 border-b border-white/20 
-                     rounded-none text-foreground text-lg font-light
-                     placeholder:text-muted-foreground/40
-                     focus:ring-0 focus:border-white/40
-                     resize-none leading-relaxed p-4 pl-0"
+          className="min-h-[180px] bg-transparent border-0 border-b border-transparent
+                     text-foreground text-2xl text-center font-light
+                     placeholder:text-white/20
+                     focus:ring-0 focus:border-b focus:border-white/30
+                     focus-visible:ring-0 focus-visible:ring-offset-0
+                     resize-none leading-relaxed p-6
+                     caret-pink-500 transition-all duration-300"
           disabled={isLoading}
         />
         
         {/* Voice input button */}
         <button 
-          className="absolute bottom-4 right-0 p-2 
-                     text-muted-foreground hover:text-foreground transition-colors"
+          className="absolute bottom-6 right-2 p-2 
+                     text-white/30 hover:text-white/60 transition-colors"
           disabled={isLoading}
         >
           <Mic size={20} strokeWidth={1.5} />
         </button>
       </div>
 
-      {/* Character counter */}
-      <div className="flex justify-between items-center text-sm text-muted-foreground">
-        <span>{dreamText.length} characters</span>
-        <span className="text-xs opacity-60">Minimum 10 characters</span>
+      {/* Character counter - subtle */}
+      <div className="flex justify-center text-xs text-white/30 tracking-wide">
+        <span>{dreamText.length} / 10 min</span>
       </div>
 
-      {/* Submit button - White with prism hover */}
-      <Button
+      {/* Holographic Action Button */}
+      <button
         onClick={handleSubmit}
         disabled={isLoading || dreamText.trim().length < 10}
-        className="w-full h-14 rounded-lg text-lg font-medium
-                   bg-primary text-primary-foreground
-                   transition-all duration-300 ease-out
-                   hover:shadow-[0_0_20px_rgba(255,255,255,0.3)]
-                   disabled:opacity-50 disabled:cursor-not-allowed
-                   disabled:hover:shadow-none"
+        className="w-full h-14 rounded-full text-lg font-semibold tracking-wide
+                   bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500
+                   text-white
+                   transition-all duration-200 ease-out
+                   hover:scale-105 hover:brightness-110
+                   hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]
+                   active:scale-95
+                   disabled:opacity-40 disabled:cursor-not-allowed
+                   disabled:hover:scale-100 disabled:hover:shadow-none disabled:hover:brightness-100
+                   flex items-center justify-center gap-2"
       >
-        <Sparkles size={20} strokeWidth={1.5} className="mr-2" />
+        <Sparkles size={20} strokeWidth={1.5} />
         Visualize Dream
-      </Button>
+      </button>
     </div>
   );
 };

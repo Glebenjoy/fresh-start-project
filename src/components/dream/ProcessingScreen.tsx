@@ -1,78 +1,71 @@
 import { useState, useEffect } from "react";
 
-const DREAM_FACTS = [
-  "Did you know? 12% of people dream in black and white...",
-  "Dreams help your brain process emotions and memories...",
-  "The most common nightmare is falling...",
-  "On average, you forget 95% of dreams within 5 minutes of waking...",
-  "Lucid dreaming can be learned with practice...",
-  "Blind people dream with other senses: sounds, touch, smells...",
+const SYSTEM_OPERATIONS = [
+  "Connecting to subconscious...",
+  "Detecting emotional patterns...",
+  "Weaving visual textures...",
+  "Rendering high-fidelity dreamscape...",
 ];
 
 const ProcessingScreen = () => {
-  const [currentFactIndex, setCurrentFactIndex] = useState(0);
-  const [status, setStatus] = useState("Synchronizing...");
+  const [currentOpIndex, setCurrentOpIndex] = useState(0);
 
-  // Rotate facts every 4 seconds
+  // Rotate operations every 800ms (fast, dynamic)
   useEffect(() => {
-    const factInterval = setInterval(() => {
-      setCurrentFactIndex((prev) => (prev + 1) % DREAM_FACTS.length);
-    }, 4000);
+    const interval = setInterval(() => {
+      setCurrentOpIndex((prev) => (prev + 1) % SYSTEM_OPERATIONS.length);
+    }, 800);
 
-    return () => clearInterval(factInterval);
-  }, []);
-
-  // Update status messages
-  useEffect(() => {
-    const timer1 = setTimeout(() => setStatus("Analyzing symbols..."), 1500);
-    const timer2 = setTimeout(() => setStatus("Generating visualization..."), 2500);
-
-    return () => {
-      clearTimeout(timer1);
-      clearTimeout(timer2);
-    };
+    return () => clearInterval(interval);
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-12 animate-fade-in">
-      {/* Pulsing white sphere */}
-      <div className="relative">
-        {/* Outer glow */}
-        <div className="absolute inset-0 w-32 h-32 rounded-full 
-                        bg-white/20 animate-ping" />
+    <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-16 animate-fade-in">
+      {/* Hypnotic Orb - Multiple spinning rings */}
+      <div className="relative w-40 h-40 flex items-center justify-center">
+        {/* Outer ring */}
+        <div 
+          className="absolute inset-0 rounded-full border-2 border-indigo-500 orb-ring"
+          style={{ borderStyle: 'dashed' }}
+        />
         
-        {/* Inner sphere */}
-        <div className="relative w-32 h-32 rounded-full 
-                        bg-white/10 border border-white/20
-                        flex items-center justify-center">
-          <div className="w-16 h-16 rounded-full bg-white/30 animate-pulse" />
-        </div>
+        {/* Middle ring */}
+        <div 
+          className="absolute inset-4 rounded-full border-2 border-cyan-400 orb-ring-reverse"
+          style={{ borderStyle: 'dotted' }}
+        />
+        
+        {/* Inner ring */}
+        <div 
+          className="absolute inset-8 rounded-full border border-pink-500 orb-ring-slow"
+        />
+        
+        {/* Core - breathing gradient */}
+        <div className="relative w-12 h-12 rounded-full orb-core bg-gradient-to-br from-indigo-500 via-cyan-400 to-pink-500" />
       </div>
 
-      {/* Status text */}
-      <div className="text-center space-y-4">
-        <p className="text-lg text-foreground/90 font-medium">
-          {status}
-        </p>
-        
-        {/* Rotating fact */}
+      {/* System Operations text */}
+      <div className="text-center space-y-2">
         <p 
-          key={currentFactIndex}
-          className="text-sm text-muted-foreground max-w-sm mx-auto italic animate-fade-in"
+          key={currentOpIndex}
+          className="text-lg text-foreground/90 font-medium tracking-wide animate-fade-in"
         >
-          {DREAM_FACTS[currentFactIndex]}
+          {SYSTEM_OPERATIONS[currentOpIndex]}
         </p>
-      </div>
-
-      {/* Progress dots */}
-      <div className="flex gap-2">
-        {[0, 1, 2].map((i) => (
-          <div
-            key={i}
-            className="w-2 h-2 rounded-full bg-white/30 animate-pulse"
-            style={{ animationDelay: `${i * 200}ms` }}
-          />
-        ))}
+        
+        {/* Subtle tech indicator */}
+        <div className="flex justify-center gap-1 mt-4">
+          {SYSTEM_OPERATIONS.map((_, i) => (
+            <div
+              key={i}
+              className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                i === currentOpIndex 
+                  ? 'bg-gradient-to-r from-indigo-500 to-pink-500 scale-125' 
+                  : 'bg-white/20'
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );

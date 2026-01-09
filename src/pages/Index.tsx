@@ -108,15 +108,21 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Aurora Background Blobs */}
+      <div className="aurora-blob w-[600px] h-[600px] bg-indigo-600/20 top-[-200px] left-[-200px] aurora-float" />
+      <div className="aurora-blob w-[500px] h-[500px] bg-fuchsia-600/10 bottom-[-150px] right-[-150px] aurora-float-delayed" />
+      
       <div className="relative z-10 container mx-auto px-4 py-12 min-h-screen flex flex-col">
-        {/* Header */}
-        <header className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-3">
+        {/* Header with fade-in-up */}
+        <header className="text-center mb-16 animate-fade-in">
+          {/* Logo Title - Gradient text */}
+          <h1 className="text-5xl md:text-6xl font-extrabold tracking-[-0.05em] mb-4
+                         bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
             VISURA AI
           </h1>
           
-          <p className="text-muted-foreground text-lg max-w-md mx-auto">
+          <p className="text-[#94A3B8] text-lg max-w-md mx-auto font-normal">
             Decode your subconscious. Visualize the hidden meanings in your dreams.
           </p>
         </header>
@@ -145,8 +151,8 @@ const Index = () => {
         </main>
 
         {/* Footer */}
-        <footer className="text-center py-6">
-          <p className="text-muted-foreground/50 text-sm">
+        <footer className="text-center py-6 animate-fade-in">
+          <p className="text-[#94A3B8]/50 text-sm font-normal">
             Powered by Jungian Psychology & AI
           </p>
         </footer>
