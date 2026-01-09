@@ -70,7 +70,7 @@ export const analyzeDream = async (
   saveDreamText(text);
   
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 second timeout
+  const timeoutId = setTimeout(() => controller.abort(), 120000); // 120 second timeout for DALL-E generation
   
   try {
     const response = await fetch('https://aikakoydev.app.n8n.cloud/webhook/dream', {
