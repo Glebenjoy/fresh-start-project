@@ -2,75 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Visura AI Design System - "Mystic Clarity" */
+/* Visura AI Design System - "Cinematic Void" */
 
 @layer base {
   :root {
-    --background: 0 0% 4%;
-    --foreground: 45 10% 95%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
 
-    --card: 0 0% 6%;
-    --card-foreground: 45 10% 95%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 6%;
-    --popover-foreground: 45 10% 95%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 45 100% 50%;
-    --primary-foreground: 0 0% 4%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 45 10% 95%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 0 0% 15%;
-    --muted-foreground: 45 5% 60%;
+    --muted-foreground: 0 0% 64%;
 
-    --accent: 35 100% 45%;
-    --accent-foreground: 0 0% 4%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 45 20% 15%;
-    --input: 0 0% 12%;
-    --ring: 45 100% 50%;
+    --border: 0 0% 100% / 0.1;
+    --input: 0 0% 10%;
+    --ring: 0 0% 100%;
 
-    --radius: 1rem;
-
-    /* Custom Visura tokens */
-    --amber-glow: 45 100% 50%;
-    --amber-warm: 35 100% 45%;
-    --glass-bg: 0 0% 100% / 0.05;
-    --glass-border: 0 0% 100% / 0.1;
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 0 0% 4%;
-    --foreground: 45 10% 95%;
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
 
-    --card: 0 0% 6%;
-    --card-foreground: 45 10% 95%;
+    --card: 0 0% 4%;
+    --card-foreground: 0 0% 100%;
 
-    --popover: 0 0% 6%;
-    --popover-foreground: 45 10% 95%;
+    --popover: 0 0% 4%;
+    --popover-foreground: 0 0% 100%;
 
-    --primary: 45 100% 50%;
-    --primary-foreground: 0 0% 4%;
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
 
-    --secondary: 0 0% 12%;
-    --secondary-foreground: 45 10% 95%;
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 0 0% 100%;
 
     --muted: 0 0% 15%;
-    --muted-foreground: 45 5% 60%;
+    --muted-foreground: 0 0% 64%;
 
-    --accent: 35 100% 45%;
-    --accent-foreground: 0 0% 4%;
+    --accent: 0 0% 15%;
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 62% 30%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 45 20% 15%;
-    --input: 0 0% 12%;
-    --ring: 45 100% 50%;
+    --border: 0 0% 100% / 0.1;
+    --input: 0 0% 10%;
+    --ring: 0 0% 100%;
   }
 }
 
@@ -86,24 +80,16 @@
 }
 
 @layer utilities {
-  .font-display {
-    font-family: 'Playfair Display', serif;
-  }
-
   .glass {
     @apply bg-white/5 backdrop-blur-md border border-white/10;
   }
 
-  .gradient-mystic {
-    background: radial-gradient(ellipse at top, hsl(35 80% 15% / 0.3), hsl(0 0% 4%) 60%, hsl(0 0% 0%));
+  .surface {
+    background-color: #0A0A0A;
   }
 
-  .text-gradient-amber {
-    @apply bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 bg-clip-text text-transparent;
-  }
-
-  .glow-amber {
-    box-shadow: 0 0 60px hsl(45 100% 50% / 0.3), 0 0 100px hsl(45 100% 50% / 0.1);
+  .prism-shadow {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
   }
 
   .blur-reveal {

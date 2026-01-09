@@ -34,22 +34,18 @@ const ProcessingScreen = () => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-12 animate-fade-in-up">
-      {/* Breathing amber sphere */}
+    <div className="flex flex-col items-center justify-center min-h-[60vh] space-y-12 animate-fade-in">
+      {/* Pulsing white sphere */}
       <div className="relative">
         {/* Outer glow */}
         <div className="absolute inset-0 w-32 h-32 rounded-full 
-                        bg-gradient-to-br from-amber-400 to-amber-600
-                        animate-breathe opacity-60" />
+                        bg-white/20 animate-ping" />
         
         {/* Inner sphere */}
         <div className="relative w-32 h-32 rounded-full 
-                        bg-gradient-to-br from-amber-300 via-amber-400 to-amber-600
-                        animate-pulse-glow shadow-2xl
+                        bg-white/10 border border-white/20
                         flex items-center justify-center">
-          <div className="w-16 h-16 rounded-full 
-                          bg-gradient-to-br from-amber-200 to-amber-400
-                          opacity-80 blur-sm" />
+          <div className="w-16 h-16 rounded-full bg-white/30 animate-pulse" />
         </div>
       </div>
 
@@ -59,11 +55,10 @@ const ProcessingScreen = () => {
           {status}
         </p>
         
-        {/* Rotating fact with fade animation */}
+        {/* Rotating fact */}
         <p 
           key={currentFactIndex}
-          className="text-sm text-muted-foreground max-w-sm mx-auto
-                     italic animate-fade-in-up"
+          className="text-sm text-muted-foreground max-w-sm mx-auto italic animate-fade-in"
         >
           {DREAM_FACTS[currentFactIndex]}
         </p>
@@ -74,7 +69,7 @@ const ProcessingScreen = () => {
         {[0, 1, 2].map((i) => (
           <div
             key={i}
-            className="w-2 h-2 rounded-full bg-amber-500/50 animate-pulse"
+            className="w-2 h-2 rounded-full bg-white/30 animate-pulse"
             style={{ animationDelay: `${i * 200}ms` }}
           />
         ))}
