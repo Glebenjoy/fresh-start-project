@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import { Eye } from "lucide-react";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import DreamInput from "@/components/dream/DreamInput";
@@ -96,7 +95,7 @@ const Index = () => {
     clearSavedDreamText();
     setDreamResult(null);
     setCurrentDreamId(null);
-    setIsUnlocked(user !== null); // Keep unlocked if user is logged in
+    setIsUnlocked(user !== null);
     setAppState("input");
   };
 
@@ -109,26 +108,11 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen gradient-mystic">
-      {/* Ambient background effects */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[600px]
-                        bg-gradient-to-b from-amber-900/20 via-amber-800/5 to-transparent
-                        blur-3xl" />
-      </div>
-
-      <div className="relative z-10 container mx-auto px-4 py-12 min-h-screen
-                      flex flex-col">
+    <div className="min-h-screen bg-background">
+      <div className="relative z-10 container mx-auto px-4 py-12 min-h-screen flex flex-col">
         {/* Header */}
         <header className="text-center mb-12">
-          <div className="inline-flex items-center gap-3 mb-4">
-            <div className="p-2 rounded-full bg-amber-500/10 border border-amber-500/20">
-              <Eye size={24} strokeWidth={1.5} className="text-amber-400" />
-            </div>
-          </div>
-          
-          <h1 className="font-display text-4xl md:text-5xl font-semibold 
-                         text-gradient-amber mb-3">
+          <h1 className="text-4xl md:text-5xl font-semibold tracking-tight text-foreground mb-3">
             VISURA AI
           </h1>
           
