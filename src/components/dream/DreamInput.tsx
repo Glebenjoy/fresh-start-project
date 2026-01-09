@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Textarea } from "@/components/ui/textarea";
 import { Sparkles, Mic } from "lucide-react";
+import { saveDreamText, getSavedDreamText } from "@/services/dreamService";
 
 interface DreamInputProps {
   onSubmit: (text: string) => void;
@@ -9,6 +10,20 @@ interface DreamInputProps {
 
 const DreamInput = ({ onSubmit, isLoading }: DreamInputProps) => {
   const [dreamText, setDreamText] = useState("");
+
+  // Restore saved dream text on mount
+  useEffect(() => {
+    const saved = getSavedDreamText();
+    if (saved) {
+      setDreamText(saved);
+    }
+  }, []);
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    const newText = e.target.value;
+    setDreamText(newText);
+    saveDreamText(newText); // Save on every keystroke
+  };
 
   const handleSubmit = () => {
     if (dreamText.trim().length < 10) return;
@@ -21,7 +36,7 @@ const DreamInput = ({ onSubmit, isLoading }: DreamInputProps) => {
       <div className="relative">
         <Textarea
           value={dreamText}
-          onChange={(e) => setDreamText(e.target.value)}
+          onChange={handleTextChange}
           placeholder="Describe your dream..."
           className="min-h-[180px] bg-transparent border-0 border-b border-transparent
                      text-foreground text-2xl text-center font-light
