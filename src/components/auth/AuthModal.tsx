@@ -86,6 +86,7 @@ const AuthModal = ({ isOpen, onClose }: AuthModalProps) => {
                 container: "auth-container",
                 button: "auth-button",
                 input: "auth-input",
+                message: "text-zinc-900 bg-white/90 p-4 rounded-lg font-medium",
               },
             }}
             providers={["google"]}
