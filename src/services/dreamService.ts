@@ -55,7 +55,7 @@ export const clearSavedResult = (): void => {
 };
 
 /**
- * Analyze dream using AI (currently MOCK)
+ * Analyze dream using AI via n8n webhook
  * @param text - Dream description from user
  * @param sessionId - Session ID for guest users
  * @returns Promise with analysis result
@@ -69,22 +69,58 @@ export const analyzeDream = async (
   // Save dream text for recovery
   saveDreamText(text);
   
-  // Simulate 3-second network delay
-  await new Promise(resolve => setTimeout(resolve, 3000));
+  const controller = new AbortController();
+  const timeoutId = setTimeout(() => controller.abort(), 90000); // 90 second timeout
   
-  // MOCK DATA for UI testing
-  const mockResult: DreamAnalysisResult = {
-    id: crypto.randomUUID(),
-    title: "The Amber Void",
-    hook_text: "You are standing on the edge of a great change. The silence in your dream screams of unspoken decisions.",
-    full_analysis: "This dream reflects a deep internal conflict regarding your recent choices. The void represents the unknown potential of your future. The amber color symbolizes a warm, yet cautionary energy — your subconscious is urging you to proceed with awareness. Jung would interpret this as a confrontation with your Shadow: the parts of yourself you have yet to acknowledge. The silence is not emptiness, but rather a space waiting to be filled by your conscious decisions.",
-    image_url: "https://images.unsplash.com/photo-1487147264018-f937fba0c817"
-  };
-  
-  console.log('[dreamService] Returning mock result:', mockResult);
-  
-  // Save result for recovery
-  saveDreamResult(mockResult);
-  
-  return mockResult;
+  try {
+    const response = await fetch('https://aikakoydev.app.n8n.cloud/webhook/dream', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        text,
+        session_id: sessionId,
+      }),
+      signal: controller.signal,
+    });
+    
+    clearTimeout(timeoutId);
+    
+    if (!response.ok) {
+      throw new Error(`API error: ${response.status} ${response.statusText}`);
+    }
+    
+    const apiResponse = await response.json();
+    console.log('[dreamService] API response:', apiResponse);
+    
+    if (!apiResponse.success || !apiResponse.data) {
+      throw new Error('Invalid API response format');
+    }
+    
+    // Map API response to DreamAnalysisResult
+    const result: DreamAnalysisResult = {
+      id: crypto.randomUUID(),
+      title: apiResponse.data.title,
+      hook_text: apiResponse.data.hook,
+      full_analysis: apiResponse.data.full_analysis || apiResponse.data.hook, // Fallback if no full analysis
+      image_url: apiResponse.data.image_url,
+    };
+    
+    console.log('[dreamService] Mapped result:', result);
+    
+    // Save result for recovery
+    saveDreamResult(result);
+    
+    return result;
+  } catch (error) {
+    clearTimeout(timeoutId);
+    
+    if (error instanceof Error && error.name === 'AbortError') {
+      throw new Error('Request timed out. The AI is taking longer than expected. Please try again.');
+    }
+    
+    console.error('[dreamService] Error:', error);
+    throw error;
+  }
 };
