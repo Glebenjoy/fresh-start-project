@@ -103,7 +103,7 @@ export const analyzeDream = async (
       id: crypto.randomUUID(),
       title: apiResponse.data.title,
       hook_text: apiResponse.data.hook,
-      full_analysis: apiResponse.data.full_analysis || apiResponse.data.hook, // Fallback if no full analysis
+      full_analysis: apiResponse.data.interpretation_full || apiResponse.data.hook, // Fallback if no full analysis
       image_url: apiResponse.data.image_url,
     };
     
