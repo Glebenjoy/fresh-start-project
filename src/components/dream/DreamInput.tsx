@@ -32,20 +32,20 @@ const DreamInput = ({ onSubmit, isLoading }: DreamInputProps) => {
 
   return (
     <div className="w-full max-w-2xl mx-auto space-y-10 animate-fade-in">
-      {/* Phantom Input - Floating in the void */}
+      {/* Glass Surface Input */}
       <div className="relative">
         <Textarea
           value={dreamText}
           onChange={handleTextChange}
           placeholder="Tell me your dream..."
-          className="phantom-input min-h-[200px] w-full p-8 caret-purple-400"
+          className="phantom-input min-h-[220px] w-full caret-purple-400"
           disabled={isLoading}
         />
         
         {/* Voice input button */}
         <button 
-          className="absolute bottom-8 right-4 p-2 
-                     text-white/20 hover:text-white/50 transition-colors"
+          className="absolute bottom-6 right-6 p-2 
+                     text-white/20 hover:text-white/40 transition-colors"
           disabled={isLoading}
         >
           <Mic size={20} strokeWidth={1.5} />

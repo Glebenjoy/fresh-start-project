@@ -157,18 +157,26 @@
     animation: aurora-breathe-alt 35s ease-in-out infinite;
   }
 
-  /* Phantom Input - Floating in the void */
+  /* Phantom Input - Glass surface floating in lit room */
   .phantom-input {
-    @apply bg-transparent border-0 border-b border-transparent;
-    @apply text-foreground text-2xl md:text-3xl text-center font-light;
-    @apply focus:ring-0 focus:border-b focus:border-white/20;
-    @apply focus-visible:ring-0 focus-visible:ring-offset-0;
-    @apply resize-none leading-relaxed;
+    @apply bg-white/[0.03] border-0 rounded-2xl;
+    @apply text-foreground text-xl md:text-2xl text-center font-light;
+    @apply resize-none leading-relaxed p-8;
+    @apply transition-all duration-300;
+    @apply focus:ring-1 focus:ring-white/20 focus:shadow-[0_0_30px_rgba(255,255,255,0.05)];
+    @apply hover:ring-1 hover:ring-white/10;
+    @apply focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-0;
     font-family: 'Inter', sans-serif;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .phantom-input::-webkit-scrollbar {
+    display: none;
   }
 
   .phantom-input::placeholder {
-    @apply text-white/15;
+    @apply text-white/20;
     font-style: italic;
   }
 
