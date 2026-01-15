@@ -1,6 +1,7 @@
 // Dream Service - Phase 1 MVP
-// Currently uses MOCK data for UI testing
-// TODO: Connect to n8n webhook in production
+// Connected to n8n webhook for AI analysis
+
+import { supabase } from '@/integrations/supabase/client';
 
 export interface DreamAnalysisResult {
   id?: string;
@@ -69,6 +70,9 @@ export const analyzeDream = async (
   // Save dream text for recovery
   saveDreamText(text);
   
+  // Get current user (if authenticated)
+  const { data: { user } } = await supabase.auth.getUser();
+  
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 120000); // 120 second timeout for DALL-E generation
   
@@ -81,6 +85,7 @@ export const analyzeDream = async (
       body: JSON.stringify({
         text,
         session_id: sessionId,
+        user_id: user?.id ?? null,
       }),
       signal: controller.signal,
     });
