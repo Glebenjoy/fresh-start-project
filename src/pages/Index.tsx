@@ -4,6 +4,7 @@ import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useToast } from "@/hooks/use-toast";
 import DreamInput from "@/components/dream/DreamInput";
 import ProcessingScreen from "@/components/dream/ProcessingScreen";
 import DreamResult from "@/components/dream/DreamResult";
@@ -15,12 +16,14 @@ import {
   clearSavedResult,
   clearSavedDreamText,
   getSavedDreamResult,
-  getSavedDreamText
+  getSavedDreamText,
+  RateLimitError
 } from "@/services/dreamService";
 
 type AppState = "input" | "processing" | "result";
 
 const Index = () => {
+  const { toast } = useToast();
   const [appState, setAppState] = useState<AppState>("input");
   const [dreamResult, setDreamResult] = useState<DreamAnalysisResult | null>(null);
   const [user, setUser] = useState<User | null>(null);
@@ -106,6 +109,22 @@ const Index = () => {
       }
     } catch (error) {
       console.error("Dream analysis failed:", error);
+      
+      // Handle rate limit error with a nice toast
+      if (error instanceof RateLimitError) {
+        toast({
+          variant: "destructive",
+          title: "Daily Limit Reached ✨",
+          description: error.message,
+        });
+      } else {
+        toast({
+          variant: "destructive",
+          title: "Something went wrong",
+          description: "Failed to analyze your dream. Please try again.",
+        });
+      }
+      
       setAppState("input");
     }
   };
