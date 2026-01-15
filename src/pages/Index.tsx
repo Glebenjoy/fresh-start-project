@@ -141,28 +141,35 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#050505] relative">
-      {/* Subtle top-center glow */}
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] 
-                      bg-gradient-to-b from-violet-900/20 via-violet-900/5 to-transparent 
-                      blur-3xl pointer-events-none" />
+    <div className="min-h-screen bg-[#030303] relative overflow-hidden">
+      {/* Large diffuse radial gradient behind grid */}
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1000px] 
+                      bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.08)_0%,_rgba(139,92,246,0.04)_40%,_transparent_70%)]
+                      pointer-events-none" />
       
-      {/* Noise texture overlay */}
-      <div className="fixed inset-0 opacity-[0.015] pointer-events-none"
+      {/* Secondary top glow */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] 
+                      bg-gradient-to-b from-violet-500/10 via-indigo-500/5 to-transparent 
+                      blur-[100px] pointer-events-none" />
+      
+      {/* Film grain noise texture overlay */}
+      <div className="fixed inset-0 opacity-[0.04] pointer-events-none mix-blend-overlay"
            style={{ 
-             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
              backgroundRepeat: 'repeat'
            }} />
 
       <div className="relative z-10 min-h-screen flex flex-col">
         {/* Top Navigation */}
-        <nav className="border-b border-white/5 backdrop-blur-md bg-zinc-950/50">
+        <nav className="border-b border-white/[0.06] backdrop-blur-2xl bg-white/[0.02]">
           <div className="max-w-4xl mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
               {/* Logo */}
               <Link 
                 to="/" 
-                className="text-xl font-bold text-white tracking-tight hover:text-white/80 transition-colors"
+                className="text-xl font-bold tracking-tight 
+                           bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70
+                           hover:from-white hover:to-white/90 transition-all duration-300"
               >
                 VISURA
               </Link>
@@ -171,9 +178,10 @@ const Index = () => {
               <div className="flex items-center gap-2">
                 {user ? (
                   <Link to="/journal">
-                    <button className="px-4 py-2 rounded-lg text-sm font-medium
-                                       bg-zinc-800/50 border border-white/10
-                                       text-zinc-300 hover:text-white hover:bg-zinc-800
+                    <button className="px-4 py-2 rounded-xl text-sm font-medium
+                                       bg-white/[0.03] backdrop-blur-xl border border-white/[0.08]
+                                       shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]
+                                       text-zinc-300 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.12]
                                        transition-all duration-200
                                        flex items-center gap-2">
                       <BookOpen size={16} strokeWidth={1.5} />
@@ -183,9 +191,10 @@ const Index = () => {
                 ) : (
                   <button 
                     onClick={() => setIsAuthModalOpen(true)}
-                    className="px-4 py-2 rounded-lg text-sm font-medium
-                               bg-zinc-800/50 border border-white/10
-                               text-zinc-300 hover:text-white hover:bg-zinc-800
+                    className="px-4 py-2 rounded-xl text-sm font-medium
+                               bg-white/[0.03] backdrop-blur-xl border border-white/[0.08]
+                               shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]
+                               text-zinc-300 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.12]
                                transition-all duration-200"
                   >
                     Sign In
@@ -202,12 +211,13 @@ const Index = () => {
             {appState === "input" && (
               <div className="animate-fade-in">
                 {/* Header */}
-                <header className="mb-8 md:mb-10">
-                  <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+                <header className="mb-10 md:mb-14">
+                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight
+                                 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/50">
                     Dream Analysis
                   </h1>
-                  <p className="text-zinc-400 mt-2 text-sm md:text-base">
-                    AI-powered Jungian interpretation of your subconscious
+                  <p className="text-xs md:text-sm text-zinc-500 mt-4 uppercase tracking-[0.2em] font-medium">
+                    AI-powered Jungian interpretation
                   </p>
                 </header>
 
