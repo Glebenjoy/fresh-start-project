@@ -134,21 +134,56 @@ const Index = () => {
       <div className="aurora-blob w-[500px] h-[500px] bg-fuchsia-600/10 bottom-[-150px] right-[-150px] aurora-float-delayed" />
       
       <div className="relative z-10 container mx-auto px-4 py-12 min-h-screen flex flex-col">
-        {/* Top Navigation */}
-        {user && (
-          <div className="absolute top-4 right-4 z-20 animate-fade-in">
-            <Link to="/journal">
-              <Button 
-                variant="ghost" 
-                size="icon"
-                className="text-muted-foreground hover:text-foreground hover:bg-white/10
-                           border border-white/10 backdrop-blur-sm"
-              >
-                <BookOpen size={20} strokeWidth={1.5} />
-              </Button>
+      {/* Top Navigation Bar */}
+      <nav className="fixed top-0 left-0 right-0 z-50 animate-fade-in">
+        <div className="mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo / Home Link */}
+            <Link 
+              to="/" 
+              className="text-lg font-bold tracking-tight bg-gradient-to-r from-white to-gray-400 
+                         bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+            >
+              VISURA
             </Link>
+
+            {/* Right Side Actions */}
+            <div className="flex items-center gap-3">
+              {user ? (
+                <Link to="/journal">
+                  <button className="group relative px-5 py-2.5 rounded-full font-medium text-sm
+                                     bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20
+                                     border border-white/20 backdrop-blur-md
+                                     hover:border-white/40 hover:from-indigo-500/30 hover:via-purple-500/30 hover:to-pink-500/30
+                                     transition-all duration-300
+                                     flex items-center gap-2 text-white/90 hover:text-white">
+                    <BookOpen size={18} strokeWidth={1.5} />
+                    <span>My Journal</span>
+                    {/* Holographic glow effect */}
+                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/0 via-purple-500/20 to-pink-500/0 
+                                    opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300 -z-10" />
+                  </button>
+                </Link>
+              ) : (
+                <button 
+                  onClick={() => setIsAuthModalOpen(true)}
+                  className="group relative px-5 py-2.5 rounded-full font-medium text-sm
+                             bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20
+                             border border-white/20 backdrop-blur-md
+                             hover:border-white/40 hover:from-indigo-500/30 hover:via-purple-500/30 hover:to-pink-500/30
+                             transition-all duration-300
+                             flex items-center gap-2 text-white/90 hover:text-white"
+                >
+                  <span>Sign In</span>
+                  {/* Holographic glow effect */}
+                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/0 via-purple-500/20 to-pink-500/0 
+                                  opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300 -z-10" />
+                </button>
+              )}
+            </div>
           </div>
-        )}
+        </div>
+      </nav>
 
         {/* Header with fade-in-up */}
         <header className="text-center mb-16 animate-fade-in">
