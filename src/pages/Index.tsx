@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
+import { BookOpen } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import DreamInput from "@/components/dream/DreamInput";
 import ProcessingScreen from "@/components/dream/ProcessingScreen";
 import DreamResult from "@/components/dream/DreamResult";
@@ -131,6 +134,22 @@ const Index = () => {
       <div className="aurora-blob w-[500px] h-[500px] bg-fuchsia-600/10 bottom-[-150px] right-[-150px] aurora-float-delayed" />
       
       <div className="relative z-10 container mx-auto px-4 py-12 min-h-screen flex flex-col">
+        {/* Top Navigation */}
+        {user && (
+          <div className="absolute top-4 right-4 z-20 animate-fade-in">
+            <Link to="/journal">
+              <Button 
+                variant="ghost" 
+                size="icon"
+                className="text-muted-foreground hover:text-foreground hover:bg-white/10
+                           border border-white/10 backdrop-blur-sm"
+              >
+                <BookOpen size={20} strokeWidth={1.5} />
+              </Button>
+            </Link>
+          </div>
+        )}
+
         {/* Header with fade-in-up */}
         <header className="text-center mb-16 animate-fade-in">
           {/* Logo Title - Gradient text */}
