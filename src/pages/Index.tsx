@@ -148,82 +148,85 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Aurora Background Blobs */}
-      <div className="aurora-blob w-[600px] h-[600px] bg-indigo-600/20 top-[-200px] left-[-200px] aurora-float" />
-      <div className="aurora-blob w-[500px] h-[500px] bg-fuchsia-600/10 bottom-[-150px] right-[-150px] aurora-float-delayed" />
+      {/* Living Aurora Background - Breathing Nebula */}
+      <div className="aurora-blob w-[800px] h-[800px] bg-indigo-600/30 top-[-300px] left-[-300px] aurora-float" />
+      <div className="aurora-blob w-[600px] h-[600px] bg-fuchsia-600/20 bottom-[-200px] right-[-200px] aurora-float-delayed" />
+      <div className="aurora-blob w-[400px] h-[400px] bg-purple-500/15 top-[40%] right-[-100px] aurora-float" style={{ animationDelay: '-5s' }} />
       
       <div className="relative z-10 container mx-auto px-4 py-12 min-h-screen flex flex-col">
-      {/* Top Navigation Bar */}
-      <nav className="fixed top-0 left-0 right-0 z-50 animate-fade-in">
-        <div className="mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            {/* Logo / Home Link */}
-            <Link 
-              to="/" 
-              className="text-lg font-bold tracking-tight bg-gradient-to-r from-white to-gray-400 
-                         bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-            >
-              VISURA
-            </Link>
+        {/* Top Navigation Bar */}
+        <nav className="fixed top-0 left-0 right-0 z-50 animate-fade-in">
+          <div className="mx-auto px-4 py-4">
+            <div className="flex items-center justify-between">
+              {/* Logo / Home Link */}
+              <Link 
+                to="/" 
+                className="font-display text-xl font-bold tracking-tight bg-gradient-to-r from-white to-gray-400 
+                           bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+              >
+                VISURA
+              </Link>
 
-            {/* Right Side Actions */}
-            <div className="flex items-center gap-3">
-              {user ? (
-                <Link to="/journal">
-                  <button className="group relative px-5 py-2.5 rounded-full font-medium text-sm
-                                     bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20
-                                     border border-white/20 backdrop-blur-md
-                                     hover:border-white/40 hover:from-indigo-500/30 hover:via-purple-500/30 hover:to-pink-500/30
-                                     transition-all duration-300
-                                     flex items-center gap-2 text-white/90 hover:text-white">
-                    <BookOpen size={18} strokeWidth={1.5} />
-                    <span>My Journal</span>
+              {/* Right Side Actions */}
+              <div className="flex items-center gap-3">
+                {user ? (
+                  <Link to="/journal">
+                    <button className="group relative px-5 py-2.5 rounded-full font-medium text-sm
+                                       bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20
+                                       border border-white/20 backdrop-blur-md
+                                       hover:border-white/40 hover:from-indigo-500/30 hover:via-purple-500/30 hover:to-pink-500/30
+                                       transition-all duration-300
+                                       flex items-center gap-2 text-white/90 hover:text-white">
+                      <BookOpen size={18} strokeWidth={1.5} />
+                      <span>My Journal</span>
+                      {/* Holographic glow effect */}
+                      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/0 via-purple-500/20 to-pink-500/0 
+                                      opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300 -z-10" />
+                    </button>
+                  </Link>
+                ) : (
+                  <button 
+                    onClick={() => setIsAuthModalOpen(true)}
+                    className="group relative px-5 py-2.5 rounded-full font-medium text-sm
+                               bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20
+                               border border-white/20 backdrop-blur-md
+                               hover:border-white/40 hover:from-indigo-500/30 hover:via-purple-500/30 hover:to-pink-500/30
+                               transition-all duration-300
+                               flex items-center gap-2 text-white/90 hover:text-white"
+                  >
+                    <span>Sign In</span>
                     {/* Holographic glow effect */}
                     <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/0 via-purple-500/20 to-pink-500/0 
                                     opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300 -z-10" />
                   </button>
-                </Link>
-              ) : (
-                <button 
-                  onClick={() => setIsAuthModalOpen(true)}
-                  className="group relative px-5 py-2.5 rounded-full font-medium text-sm
-                             bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20
-                             border border-white/20 backdrop-blur-md
-                             hover:border-white/40 hover:from-indigo-500/30 hover:via-purple-500/30 hover:to-pink-500/30
-                             transition-all duration-300
-                             flex items-center gap-2 text-white/90 hover:text-white"
-                >
-                  <span>Sign In</span>
-                  {/* Holographic glow effect */}
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/0 via-purple-500/20 to-pink-500/0 
-                                  opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300 -z-10" />
-                </button>
-              )}
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      </nav>
+        </nav>
 
-        {/* Header with fade-in-up */}
-        <header className="text-center mb-16 animate-fade-in">
-          {/* Logo Title - Gradient text */}
-          <h1 className="text-5xl md:text-6xl font-extrabold tracking-[-0.05em] mb-4
-                         bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
-            VISURA AI
-          </h1>
-          
-          <p className="text-[#94A3B8] text-lg max-w-md mx-auto font-normal">
-            Decode your subconscious. Visualize the hidden meanings in your dreams.
-          </p>
-        </header>
-
-        {/* Main Content */}
-        <main className="flex-1 flex items-center justify-center py-8">
+        {/* Main Content - Glass Altar */}
+        <main className="flex-1 flex items-center justify-center py-8 mt-16">
           {appState === "input" && (
-            <DreamInput 
-              onSubmit={handleDreamSubmit} 
-              isLoading={false} 
-            />
+            <div className="glass-altar p-8 md:p-12 w-full max-w-2xl animate-fade-in">
+              {/* Header inside Glass Altar */}
+              <header className="text-center mb-10">
+                {/* Logo Title - Space Grotesk */}
+                <h1 className="font-display text-5xl md:text-6xl font-bold tracking-[-0.02em] mb-4
+                               bg-gradient-to-b from-white via-white to-gray-500 bg-clip-text text-transparent">
+                  VISURA AI
+                </h1>
+                
+                <p className="text-white/50 text-lg max-w-md mx-auto font-normal">
+                  Decode your subconscious. Visualize the hidden meanings in your dreams.
+                </p>
+              </header>
+
+              <DreamInput 
+                onSubmit={handleDreamSubmit} 
+                isLoading={false} 
+              />
+            </div>
           )}
 
           {appState === "processing" && (
@@ -242,7 +245,7 @@ const Index = () => {
 
         {/* Footer */}
         <footer className="text-center py-6 animate-fade-in">
-          <p className="text-[#94A3B8]/50 text-sm font-normal">
+          <p className="text-white/30 text-sm font-normal">
             Powered by Jungian Psychology & AI
           </p>
         </footer>
