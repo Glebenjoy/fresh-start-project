@@ -9,6 +9,7 @@ import StatWidget from "@/components/dashboard/StatWidget";
 import ProcessingScreen from "@/components/dream/ProcessingScreen";
 import DreamResult from "@/components/dream/DreamResult";
 import AuthModal from "@/components/auth/AuthModal";
+import DigitalDust from "@/components/effects/DigitalDust";
 import { 
   analyzeDream, 
   getSessionId, 
@@ -141,19 +142,24 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#030303] relative overflow-hidden">
-      {/* Large diffuse radial gradient behind grid */}
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1200px] h-[1000px] 
-                      bg-[radial-gradient(ellipse_at_center,_rgba(99,102,241,0.08)_0%,_rgba(139,92,246,0.04)_40%,_transparent_70%)]
-                      pointer-events-none" />
+    <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Digital Dust Particles */}
+      <DigitalDust />
       
-      {/* Secondary top glow */}
-      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[600px] h-[300px] 
-                      bg-gradient-to-b from-violet-500/10 via-indigo-500/5 to-transparent 
-                      blur-[100px] pointer-events-none" />
+      {/* Massive Violet/Indigo Spotlight - The Core Glow */}
+      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] 
+                      from-indigo-900/40 via-violet-950/20 to-black pointer-events-none" />
+      
+      {/* Secondary Purple Orb Glow */}
+      <div className="fixed top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] 
+                      bg-violet-600/15 blur-[150px] rounded-full pointer-events-none" />
+      
+      {/* Accent Cyan Edge Glow */}
+      <div className="fixed bottom-0 right-0 w-[500px] h-[400px] 
+                      bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none" />
       
       {/* Film grain noise texture overlay */}
-      <div className="fixed inset-0 opacity-[0.04] pointer-events-none mix-blend-overlay"
+      <div className="fixed inset-0 opacity-[0.03] pointer-events-none"
            style={{ 
              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
              backgroundRepeat: 'repeat'
@@ -212,11 +218,10 @@ const Index = () => {
               <div className="animate-fade-in">
                 {/* Header */}
                 <header className="mb-10 md:mb-14">
-                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight
-                                 bg-clip-text text-transparent bg-gradient-to-b from-white via-white to-white/50">
+                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white">
                     Dream Analysis
                   </h1>
-                  <p className="text-xs md:text-sm text-zinc-500 mt-4 uppercase tracking-[0.2em] font-medium">
+                  <p className="text-xs md:text-sm text-zinc-400 mt-4 uppercase tracking-[0.2em] font-medium">
                     AI-powered Jungian interpretation
                   </p>
                 </header>
