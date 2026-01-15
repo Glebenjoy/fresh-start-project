@@ -21,7 +21,7 @@ export default {
       fontFamily: {
         sans: ["Space Grotesk", "sans-serif"],
         mystic: ["Cormorant Garamond", "serif"],
-        display: ["Syne", "sans-serif"],
+        display: ["Manrope", "sans-serif"],
         body: ["Inter", "sans-serif"],
       },
       colors: {
