@@ -59,6 +59,24 @@ export type Database = {
         }
         Relationships: []
       }
+      profiles: {
+        Row: {
+          id: string
+          is_pro: boolean | null
+          last_generation_date: string | null
+        }
+        Insert: {
+          id?: string
+          is_pro?: boolean | null
+          last_generation_date?: string | null
+        }
+        Update: {
+          id?: string
+          is_pro?: boolean | null
+          last_generation_date?: string | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never

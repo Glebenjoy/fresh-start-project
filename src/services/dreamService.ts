@@ -11,6 +11,73 @@ export interface DreamAnalysisResult {
   image_url: string;
 }
 
+export class RateLimitError extends Error {
+  constructor(message: string) {
+    super(message);
+    this.name = 'RateLimitError';
+  }
+}
+
+/**
+ * Check if user can generate a dream (rate limiting)
+ * Pro users: unlimited
+ * Free users: 1 per 24 hours
+ */
+export const checkUserLimit = async (userId: string): Promise<boolean> => {
+  const { data: profile, error } = await supabase
+    .from('profiles')
+    .select('is_pro, last_generation_date')
+    .eq('id', userId)
+    .maybeSingle();
+
+  if (error) {
+    console.error('[dreamService] Error fetching profile:', error);
+    // If we can't check, allow the request (fail open for MVP)
+    return true;
+  }
+
+  // No profile found - user might be new, allow request
+  if (!profile) {
+    return true;
+  }
+
+  // Pro users have unlimited access
+  if (profile.is_pro) {
+    return true;
+  }
+
+  // Free users: check 24-hour limit
+  if (profile.last_generation_date) {
+    const lastGeneration = new Date(profile.last_generation_date);
+    const now = new Date();
+    const hoursSinceLastGeneration = (now.getTime() - lastGeneration.getTime()) / (1000 * 60 * 60);
+    
+    if (hoursSinceLastGeneration < 24) {
+      const hoursRemaining = Math.ceil(24 - hoursSinceLastGeneration);
+      throw new RateLimitError(
+        `You've used your free dream for today. Come back in ${hoursRemaining} hour${hoursRemaining !== 1 ? 's' : ''} or upgrade to Pro for unlimited dreams.`
+      );
+    }
+  }
+
+  return true;
+};
+
+/**
+ * Update user's last generation date after successful dream analysis
+ */
+export const updateLastGenerationDate = async (userId: string): Promise<void> => {
+  const { error } = await supabase
+    .from('profiles')
+    .update({ last_generation_date: new Date().toISOString() })
+    .eq('id', userId);
+
+  if (error) {
+    console.error('[dreamService] Error updating last_generation_date:', error);
+    // Non-critical error, don't throw
+  }
+};
+
 // Generate or retrieve session_id from localStorage
 export const getSessionId = (): string => {
   const STORAGE_KEY = 'visura_session_id';
@@ -73,6 +140,11 @@ export const analyzeDream = async (
   // Get current user (if authenticated)
   const { data: { user } } = await supabase.auth.getUser();
   
+  // Check rate limit for authenticated users only
+  if (user) {
+    await checkUserLimit(user.id);
+  }
+  
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 120000); // 120 second timeout for DALL-E generation
   
@@ -116,6 +188,11 @@ export const analyzeDream = async (
     
     // Save result for recovery
     saveDreamResult(result);
+    
+    // Update last_generation_date for authenticated users
+    if (user) {
+      await updateLastGenerationDate(user.id);
+    }
     
     return result;
   } catch (error) {
