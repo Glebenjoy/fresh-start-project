@@ -149,7 +149,10 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Central Radial Spotlight */}
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-black to-black pointer-events-none" />
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/25 via-black to-black pointer-events-none" />
+      
+      {/* Purple Spotlight - Behind Title/Input */}
+      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-purple-600/20 blur-[100px] rounded-full pointer-events-none" />
       
       {/* Living Aurora Background - Deep Breathing Nebula */}
       <div className="aurora-blob w-[900px] h-[900px] bg-purple-900/40 blur-[120px] top-[-350px] left-[-350px] aurora-breathe" />
