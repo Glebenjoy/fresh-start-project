@@ -62,9 +62,9 @@ const Journal = () => {
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Aurora Background Blobs */}
-      <div className="aurora-blob w-[600px] h-[600px] bg-indigo-600/20 top-[-200px] left-[-200px] aurora-float" />
-      <div className="aurora-blob w-[500px] h-[500px] bg-fuchsia-600/10 bottom-[-150px] right-[-150px] aurora-float-delayed" />
+      {/* Living Aurora Background */}
+      <div className="aurora-blob w-[800px] h-[800px] bg-purple-900/30 blur-[120px] top-[-300px] left-[-300px] aurora-breathe" />
+      <div className="aurora-blob w-[600px] h-[600px] bg-cyan-900/30 blur-[120px] bottom-[-200px] right-[-200px] aurora-breathe-alt" />
       
       <div className="relative z-10 container mx-auto px-4 py-8 min-h-screen flex flex-col">
         {/* Header */}
@@ -80,11 +80,10 @@ const Journal = () => {
               </Button>
             </Link>
             <div>
-              <h1 className="text-3xl md:text-4xl font-bold 
-                             bg-gradient-to-b from-white to-gray-400 bg-clip-text text-transparent">
+              <h1 className="font-mystic text-4xl md:text-5xl font-medium italic text-white tracking-wide">
                 Dream Journal
               </h1>
-              <p className="text-muted-foreground text-sm">
+              <p className="text-white/30 text-sm font-body mt-1">
                 Your subconscious archive
               </p>
             </div>
@@ -124,21 +123,24 @@ const Journal = () => {
 
 const EmptyState = () => (
   <div className="flex flex-col items-center justify-center py-20 animate-fade-in">
-    <div className="w-24 h-24 mb-6 rounded-full bg-gradient-to-br from-indigo-500/20 to-fuchsia-500/20 
-                    flex items-center justify-center border border-white/10">
-      <Sparkles size={40} strokeWidth={1} className="text-indigo-400" />
+    <div className="w-24 h-24 mb-6 rounded-full bg-white/[0.03] backdrop-blur-md
+                    flex items-center justify-center">
+      <Sparkles size={40} strokeWidth={1} className="text-purple-400/60" />
     </div>
-    <h2 className="text-2xl font-semibold text-foreground mb-2">
+    <h2 className="font-mystic text-3xl italic text-white mb-3">
       Your subconscious is waiting...
     </h2>
-    <p className="text-muted-foreground text-center max-w-md mb-8">
+    <p className="text-white/30 text-center max-w-md mb-10 font-body">
       You haven't recorded any dreams yet. Start your journey into the depths of your mind.
     </p>
     <Link to="/">
-      <Button className="btn-holographic px-8 py-3 h-auto text-base">
-        <Plus size={20} strokeWidth={2} className="mr-2" />
+      <button className="px-8 py-3 rounded-full text-base font-medium
+                         bg-white/5 backdrop-blur-md border border-white/10
+                         text-white/90 hover:bg-white/10 hover:border-white/20
+                         transition-all duration-300 flex items-center gap-2">
+        <Plus size={18} strokeWidth={2} />
         Record a Dream
-      </Button>
+      </button>
     </Link>
   </div>
 );
@@ -173,10 +175,7 @@ const DreamCard = ({ dream, onClick, delay }: DreamCardProps) => (
     className="break-inside-avoid mb-4 group cursor-pointer"
     style={{ animationDelay: `${delay}s` }}
   >
-    <div className="glass-card rounded-xl overflow-hidden 
-                    transition-all duration-300 
-                    hover:border-white/20 hover:scale-[1.02]
-                    hover:shadow-[0_0_30px_rgba(99,102,241,0.2)]">
+    <div className="shard-card overflow-hidden">
       {dream.image_url && (
         <div className="relative overflow-hidden">
           <img
@@ -185,19 +184,19 @@ const DreamCard = ({ dream, onClick, delay }: DreamCardProps) => (
             className="w-full object-cover transition-transform duration-500 group-hover:scale-105"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
         </div>
       )}
-      <div className="p-4">
-        <h3 className="font-semibold text-foreground text-lg mb-1 line-clamp-2">
+      <div className="p-5">
+        <h3 className="font-mystic text-xl italic text-white mb-2 line-clamp-2">
           {dream.title || "Untitled Dream"}
         </h3>
         {dream.interpretation_preview && (
-          <p className="text-muted-foreground text-sm line-clamp-2">
+          <p className="text-white/40 text-sm line-clamp-2 font-body">
             {dream.interpretation_preview}
           </p>
         )}
-        <p className="text-muted-foreground/60 text-xs mt-2">
+        <p className="text-white/20 text-xs mt-3 font-body tracking-wide">
           {dream.created_at 
             ? new Date(dream.created_at).toLocaleDateString('en-US', { 
                 month: 'short', 
