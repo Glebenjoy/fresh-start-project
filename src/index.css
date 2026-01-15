@@ -179,13 +179,15 @@
     animation: dust-float linear infinite;
   }
 
-  /* Button Breathing Animation */
+  /* Button Heartbeat Animation - Living Power Cell */
   @keyframes button-breathe {
     0%, 100% {
-      box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+      transform: scale(1);
+      box-shadow: 0 0 20px rgba(124, 58, 237, 0.4);
     }
     50% {
-      box-shadow: 0 0 35px rgba(139, 92, 246, 0.5);
+      transform: scale(1.03);
+      box-shadow: 0 0 40px rgba(124, 58, 237, 0.7);
     }
   }
 

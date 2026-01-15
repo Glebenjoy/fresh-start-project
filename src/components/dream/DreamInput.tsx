@@ -62,7 +62,8 @@ const DreamInput = ({ onSubmit, isLoading }: DreamInputProps) => {
         <button
           onClick={handleSubmit}
           disabled={isLoading || dreamText.trim().length < 10}
-          className="group px-10 py-4 rounded-full text-base font-medium tracking-wide
+          className="group px-10 py-4 rounded-full 
+                     font-mono text-sm font-bold uppercase tracking-widest
                      bg-gradient-to-r from-violet-600/80 to-indigo-600/80
                      backdrop-blur-md
                      border-t border-t-white/30 border-b border-b-white/5 border-x border-x-white/15
@@ -71,7 +72,6 @@ const DreamInput = ({ onSubmit, isLoading }: DreamInputProps) => {
                      transition-all duration-300 ease-out
                      animate-button-breathe
                      hover:from-violet-500/90 hover:to-indigo-500/90
-                     hover:scale-105
                      hover:shadow-[0_0_40px_rgba(124,58,237,0.6)]
                      active:scale-95
                      disabled:opacity-30 disabled:cursor-not-allowed
