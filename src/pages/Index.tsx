@@ -148,10 +148,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Living Aurora Background - Breathing Nebula */}
-      <div className="aurora-blob w-[800px] h-[800px] bg-indigo-600/30 top-[-300px] left-[-300px] aurora-float" />
-      <div className="aurora-blob w-[600px] h-[600px] bg-fuchsia-600/20 bottom-[-200px] right-[-200px] aurora-float-delayed" />
-      <div className="aurora-blob w-[400px] h-[400px] bg-purple-500/15 top-[40%] right-[-100px] aurora-float" style={{ animationDelay: '-5s' }} />
+      {/* Living Aurora Background - Deep Breathing Nebula */}
+      <div className="aurora-blob w-[900px] h-[900px] bg-purple-900/30 blur-[120px] top-[-350px] left-[-350px] aurora-breathe" />
+      <div className="aurora-blob w-[700px] h-[700px] bg-cyan-900/30 blur-[120px] bottom-[-250px] right-[-250px] aurora-breathe-alt" />
       
       <div className="relative z-10 container mx-auto px-4 py-12 min-h-screen flex flex-col">
         {/* Top Navigation Bar */}
@@ -161,10 +160,10 @@ const Index = () => {
               {/* Logo / Home Link */}
               <Link 
                 to="/" 
-                className="font-display text-xl font-bold tracking-tight bg-gradient-to-r from-white to-gray-400 
-                           bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+                className="font-mystic text-2xl font-medium italic tracking-wide text-white/80 
+                           hover:text-white transition-colors"
               >
-                VISURA
+                Visura
               </Link>
 
               {/* Right Side Actions */}
@@ -205,20 +204,20 @@ const Index = () => {
           </div>
         </nav>
 
-        {/* Main Content - Glass Altar */}
+        {/* Main Content - Floating in the Void */}
         <main className="flex-1 flex items-center justify-center py-8 mt-16">
           {appState === "input" && (
-            <div className="glass-altar p-8 md:p-12 w-full max-w-2xl animate-fade-in">
-              {/* Header inside Glass Altar */}
-              <header className="text-center mb-10">
-                {/* Logo Title - Space Grotesk */}
-                <h1 className="font-display text-5xl md:text-6xl font-bold tracking-[-0.02em] mb-4
-                               bg-gradient-to-b from-white via-white to-gray-500 bg-clip-text text-transparent">
-                  VISURA AI
+            <div className="w-full max-w-2xl animate-fade-in text-center">
+              {/* Header - Floating Title */}
+              <header className="mb-16">
+                {/* Logo Title - Mystic Cormorant Garamond */}
+                <h1 className="font-mystic text-6xl md:text-7xl lg:text-8xl font-medium italic tracking-wide mb-6
+                               text-white">
+                  VISURA <span className="text-white/60">AI</span>
                 </h1>
                 
-                <p className="text-white/50 text-lg max-w-md mx-auto font-normal">
-                  Decode your subconscious. Visualize the hidden meanings in your dreams.
+                <p className="text-white/30 text-lg max-w-md mx-auto font-body font-light tracking-wide">
+                  Decode your subconscious
                 </p>
               </header>
 

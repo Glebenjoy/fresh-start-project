@@ -75,7 +75,7 @@
 
   body {
     @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
   }
 }
 
@@ -109,68 +109,79 @@
     @apply scale-95;
   }
 
-  /* Aurora background blobs */
+  /* Aurora background blobs - Living Nebula */
   .aurora-blob {
-    @apply absolute rounded-full blur-[120px] pointer-events-none;
+    @apply absolute rounded-full pointer-events-none;
   }
 
-  /* Living Nebula - Aurora Float Animation */
-  @keyframes aurora-drift {
-    0% { 
-      transform: translate(0, 0) rotate(0deg) scale(1);
-      opacity: 0.15;
-    }
-    25% { 
-      transform: translate(50px, -30px) rotate(45deg) scale(1.1);
-      opacity: 0.25;
-    }
-    50% { 
-      transform: translate(-20px, -60px) rotate(90deg) scale(0.95);
-      opacity: 0.2;
-    }
-    75% { 
-      transform: translate(-40px, -20px) rotate(135deg) scale(1.15);
-      opacity: 0.3;
-    }
-    100% { 
-      transform: translate(0, 0) rotate(180deg) scale(1);
-      opacity: 0.15;
-    }
-  }
-
-  @keyframes aurora-pulse {
+  /* Deep Living Aurora Animation - Slow Breathing Nebula */
+  @keyframes aurora-breathe {
     0%, 100% { 
       transform: translate(0, 0) scale(1);
-      opacity: 0.1;
-      filter: blur(120px);
+      opacity: 0.25;
+    }
+    25% { 
+      transform: translate(30px, -20px) scale(1.05);
+      opacity: 0.35;
+    }
+    50% { 
+      transform: translate(-20px, -40px) scale(1.1);
+      opacity: 0.3;
+    }
+    75% { 
+      transform: translate(-30px, 10px) scale(1.02);
+      opacity: 0.4;
+    }
+  }
+
+  @keyframes aurora-breathe-alt {
+    0%, 100% { 
+      transform: translate(0, 0) scale(1);
+      opacity: 0.2;
     }
     33% { 
-      transform: translate(-60px, 40px) scale(1.2);
-      opacity: 0.2;
-      filter: blur(140px);
+      transform: translate(-40px, 30px) scale(1.15);
+      opacity: 0.35;
     }
     66% { 
-      transform: translate(40px, -50px) scale(0.9);
-      opacity: 0.15;
-      filter: blur(100px);
+      transform: translate(30px, -20px) scale(0.95);
+      opacity: 0.25;
     }
   }
 
-  .aurora-float {
-    animation: aurora-drift 20s ease-in-out infinite;
+  .aurora-breathe {
+    animation: aurora-breathe 30s ease-in-out infinite;
   }
 
-  .aurora-float-delayed {
-    animation: aurora-pulse 25s ease-in-out infinite;
+  .aurora-breathe-alt {
+    animation: aurora-breathe-alt 35s ease-in-out infinite;
   }
 
-  /* Glass Altar Container */
-  .glass-altar {
-    @apply bg-white/5 backdrop-blur-xl border border-white/10 rounded-[2rem];
-    box-shadow: 
-      inset 0 0 20px rgba(255, 255, 255, 0.05),
-      0 0 80px rgba(99, 102, 241, 0.1),
-      0 0 120px rgba(236, 72, 153, 0.05);
+  /* Phantom Input - Floating in the void */
+  .phantom-input {
+    @apply bg-transparent border-0 border-b border-transparent;
+    @apply text-foreground text-2xl md:text-3xl text-center font-light;
+    @apply focus:ring-0 focus:border-b focus:border-white/20;
+    @apply focus-visible:ring-0 focus-visible:ring-offset-0;
+    @apply resize-none leading-relaxed;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .phantom-input::placeholder {
+    @apply text-white/15;
+    font-style: italic;
+  }
+
+  /* Shard Card - Ultra subtle glass */
+  .shard-card {
+    background: rgba(255, 255, 255, 0.03);
+    @apply backdrop-blur-md rounded-xl;
+    @apply transition-all duration-300;
+  }
+
+  .shard-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    @apply shadow-[0_0_40px_rgba(99,102,241,0.15)];
   }
 
   /* Hypnotic Orb animations */
