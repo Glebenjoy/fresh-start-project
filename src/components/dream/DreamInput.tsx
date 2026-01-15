@@ -57,20 +57,23 @@ const DreamInput = ({ onSubmit, isLoading }: DreamInputProps) => {
         <span>{dreamText.length} characters</span>
       </div>
 
-      {/* Minimal Glass Button */}
+      {/* Glowing Gradient Button */}
       <div className="flex justify-center">
         <button
           onClick={handleSubmit}
           disabled={isLoading || dreamText.trim().length < 10}
           className="px-10 py-4 rounded-full text-base font-medium tracking-wide
-                     bg-white/5 backdrop-blur-md border border-white/10
-                     text-white/90
+                     bg-gradient-to-r from-violet-600/80 to-indigo-600/80
+                     backdrop-blur-md border border-white/20
+                     text-white
                      transition-all duration-300 ease-out
-                     hover:bg-white/10 hover:border-white/20
-                     hover:shadow-[0_0_40px_rgba(168,85,247,0.3)]
+                     hover:from-violet-500/90 hover:to-indigo-500/90
+                     hover:border-white/30
+                     hover:shadow-[0_0_30px_rgba(124,58,237,0.5)]
                      active:scale-95
                      disabled:opacity-30 disabled:cursor-not-allowed
-                     disabled:hover:bg-white/5 disabled:hover:border-white/10 disabled:hover:shadow-none
+                     disabled:from-violet-600/40 disabled:to-indigo-600/40
+                     disabled:hover:shadow-none
                      flex items-center gap-3"
         >
           <Sparkles size={18} strokeWidth={1.5} />
