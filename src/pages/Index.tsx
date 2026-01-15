@@ -170,7 +170,7 @@ const Index = () => {
               {/* Logo / Home Link */}
               <Link 
                 to="/" 
-                className="font-mystic text-2xl font-medium italic tracking-wide text-white/80 
+                className="font-display text-2xl font-extrabold uppercase tracking-tight text-white/80 
                            hover:text-white transition-colors"
               >
                 Visura
@@ -220,9 +220,9 @@ const Index = () => {
             <div className="w-full max-w-2xl animate-fade-in text-center">
               {/* Header - Floating Title */}
               <header className="mb-14">
-                {/* Logo Title - Mystic Cormorant Garamond, fashion-editorial */}
-                <h1 className="font-mystic text-6xl md:text-7xl lg:text-8xl font-medium italic tracking-tight mb-5
-                               text-white/90">
+                {/* Logo Title - Syne Extra Bold, futuristic liquid art */}
+                <h1 className="font-display text-6xl md:text-7xl lg:text-8xl font-extrabold uppercase tracking-tighter mb-5
+                               text-white drop-shadow-[0_0_30px_rgba(255,255,255,0.15)]">
                   VISURA AI
                 </h1>
                 
