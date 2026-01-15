@@ -63,19 +63,19 @@ const DreamInput = ({ onSubmit, isLoading }: DreamInputProps) => {
           onClick={handleSubmit}
           disabled={isLoading || dreamText.trim().length < 10}
           className="group px-12 py-4 rounded-full 
-                     font-mono text-sm uppercase tracking-[0.3em]
+                     font-mono text-sm font-semibold uppercase tracking-[0.3em]
                      bg-black/40 backdrop-blur-md
-                     border border-violet-500/50
-                     shadow-[inset_0_0_20px_rgba(139,92,246,0.2)]
-                     text-white/80
+                     border border-violet-400/70
+                     shadow-[inset_0_0_20px_rgba(139,92,246,0.25)]
+                     text-white
                      transition-all duration-500 ease-out
                      animate-prism-pulse
-                     hover:border-violet-400 hover:text-white
-                     hover:shadow-[inset_0_0_30px_rgba(139,92,246,0.5),0_0_20px_rgba(139,92,246,0.3)]
-                     active:shadow-[inset_0_0_40px_rgba(139,92,246,0.7)]
+                     hover:bg-violet-500/20 hover:border-violet-300
+                     hover:shadow-[inset_0_0_30px_rgba(139,92,246,0.5),0_0_30px_rgba(139,92,246,0.6)]
+                     active:shadow-[inset_0_0_40px_rgba(139,92,246,0.7),0_0_40px_rgba(139,92,246,0.8)]
                      disabled:opacity-30 disabled:cursor-not-allowed
                      disabled:animate-none
-                     disabled:hover:shadow-none disabled:hover:border-violet-500/50
+                     disabled:hover:shadow-none disabled:hover:border-violet-400/70 disabled:hover:bg-black/40
                      flex items-center gap-4"
         >
           <Sparkles size={16} strokeWidth={1.5} className="opacity-60 group-hover:opacity-100 transition-opacity" />
