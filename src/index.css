@@ -157,20 +157,20 @@
     animation: aurora-breathe-alt 35s ease-in-out infinite;
   }
 
-  /* Phantom Input - Glowing Glass Artifact */
+  /* Phantom Input - Glass Slab with Top Light Effect */
   .phantom-input {
-    @apply bg-white/[0.05] rounded-2xl;
-    @apply border border-white/10 border-t-white/20;
+    @apply bg-white/[0.05] rounded-2xl backdrop-blur-xl;
+    @apply border-t border-t-white/30 border-b border-b-white/5 border-x border-x-white/10;
     @apply text-foreground text-xl md:text-2xl text-center font-light;
     @apply resize-none leading-relaxed p-8;
     @apply transition-all duration-300;
-    @apply focus:ring-1 focus:ring-white/20 focus:border-white/20;
-    @apply hover:border-white/15;
-    @apply focus-visible:ring-1 focus-visible:ring-white/20 focus-visible:ring-offset-0;
+    @apply focus:border-t-white/40 focus:border-x-white/20;
+    @apply hover:border-t-white/35;
+    @apply focus-visible:ring-1 focus-visible:ring-white/10 focus-visible:ring-offset-0;
     font-family: 'Inter', sans-serif;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    box-shadow: inset 0 0 20px rgba(255,255,255,0.05), 0 0 40px rgba(139,92,246,0.1);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1), inset 0 0 20px rgba(255,255,255,0.03), 0 0 40px rgba(139,92,246,0.1);
   }
 
   .phantom-input::-webkit-scrollbar {

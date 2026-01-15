@@ -222,7 +222,7 @@ const Index = () => {
                   VISURA AI
                 </h1>
                 
-                <p className="text-white/40 text-lg max-w-md mx-auto font-body font-light tracking-wide">
+                <p className="text-white/40 text-xs uppercase tracking-[0.25em] max-w-md mx-auto font-body font-medium">
                   Decode your subconscious
                 </p>
               </header>
