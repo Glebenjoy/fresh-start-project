@@ -2,14 +2,13 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
-import { BookOpen } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { BookOpen, Moon, Flame, Sparkles } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import DreamInput from "@/components/dream/DreamInput";
+import CommandCenter from "@/components/dashboard/CommandCenter";
+import StatWidget from "@/components/dashboard/StatWidget";
 import ProcessingScreen from "@/components/dream/ProcessingScreen";
 import DreamResult from "@/components/dream/DreamResult";
 import AuthModal from "@/components/auth/AuthModal";
-import DigitalDust from "@/components/effects/DigitalDust";
 import { 
   analyzeDream, 
   getSessionId, 
@@ -43,7 +42,6 @@ const Index = () => {
       setCurrentDreamId(savedResult.id || null);
       setAppState("result");
     } else if (savedDreamText) {
-      // User had typed but not submitted - stay on input
       setAppState("input");
     }
   }, []);
@@ -55,12 +53,10 @@ const Index = () => {
         setSession(session);
         setUser(session?.user ?? null);
 
-        // If user just signed in and we have a pending dream, unlock it
         if (event === "SIGNED_IN" && session?.user) {
           setIsAuthModalOpen(false);
           setIsUnlocked(true);
           
-          // Link dream to user in database
           if (currentDreamId) {
             setTimeout(() => {
               linkDreamToUser(currentDreamId, session.user.id);
@@ -70,7 +66,6 @@ const Index = () => {
       }
     );
 
-    // Check for existing session
     supabase.auth.getSession().then(({ data: { session } }) => {
       setSession(session);
       setUser(session?.user ?? null);
@@ -104,14 +99,12 @@ const Index = () => {
       setCurrentDreamId(result.id || null);
       setAppState("result");
       
-      // If user is already logged in, unlock immediately
       if (user) {
         setIsUnlocked(true);
       }
     } catch (error) {
       console.error("Dream analysis failed:", error);
       
-      // Handle rate limit error with a nice toast
       if (error instanceof RateLimitError) {
         toast({
           variant: "destructive",
@@ -148,65 +141,54 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
-      {/* Digital Dust - Floating Particles */}
-      <DigitalDust />
+    <div className="min-h-screen bg-[#050505] relative">
+      {/* Subtle top-center glow */}
+      <div className="fixed top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] 
+                      bg-gradient-to-b from-violet-900/20 via-violet-900/5 to-transparent 
+                      blur-3xl pointer-events-none" />
       
-      {/* Central Radial Spotlight */}
-      <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/25 via-black to-black pointer-events-none" />
-      
-      {/* Purple Spotlight - Behind Title/Input */}
-      <div className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-purple-600/20 blur-[100px] rounded-full pointer-events-none" />
-      
-      {/* Living Aurora Background - Deep Breathing Nebula */}
-      <div className="aurora-blob w-[900px] h-[900px] bg-purple-900/40 blur-[120px] top-[-350px] left-[-350px] aurora-breathe" />
-      <div className="aurora-blob w-[700px] h-[700px] bg-cyan-900/40 blur-[120px] bottom-[-250px] right-[-250px] aurora-breathe-alt" />
-      
-      <div className="relative z-10 container mx-auto px-4 py-12 min-h-screen flex flex-col">
-        {/* Top Navigation Bar */}
-        <nav className="fixed top-0 left-0 right-0 z-50 animate-fade-in">
-          <div className="mx-auto px-4 py-4">
+      {/* Noise texture overlay */}
+      <div className="fixed inset-0 opacity-[0.015] pointer-events-none"
+           style={{ 
+             backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
+             backgroundRepeat: 'repeat'
+           }} />
+
+      <div className="relative z-10 min-h-screen flex flex-col">
+        {/* Top Navigation */}
+        <nav className="border-b border-white/5 backdrop-blur-md bg-zinc-950/50">
+          <div className="max-w-4xl mx-auto px-4 py-4">
             <div className="flex items-center justify-between">
-              {/* Logo / Home Link */}
+              {/* Logo */}
               <Link 
                 to="/" 
-                className="font-display text-2xl font-extrabold uppercase tracking-tight text-white 
-                           hover:text-white/80 transition-colors"
+                className="text-xl font-bold text-white tracking-tight hover:text-white/80 transition-colors"
               >
                 VISURA
               </Link>
 
-              {/* Right Side Actions */}
-              <div className="flex items-center gap-3">
+              {/* Right Side */}
+              <div className="flex items-center gap-2">
                 {user ? (
                   <Link to="/journal">
-                    <button className="group relative px-5 py-2.5 rounded-full font-medium text-sm
-                                       bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20
-                                       border border-white/20 backdrop-blur-md
-                                       hover:border-white/40 hover:from-indigo-500/30 hover:via-purple-500/30 hover:to-pink-500/30
-                                       transition-all duration-300
-                                       flex items-center gap-2 text-white/90 hover:text-white">
-                      <BookOpen size={18} strokeWidth={1.5} />
-                      <span>My Journal</span>
-                      {/* Holographic glow effect */}
-                      <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/0 via-purple-500/20 to-pink-500/0 
-                                      opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300 -z-10" />
+                    <button className="px-4 py-2 rounded-lg text-sm font-medium
+                                       bg-zinc-800/50 border border-white/10
+                                       text-zinc-300 hover:text-white hover:bg-zinc-800
+                                       transition-all duration-200
+                                       flex items-center gap-2">
+                      <BookOpen size={16} strokeWidth={1.5} />
+                      Journal
                     </button>
                   </Link>
                 ) : (
                   <button 
                     onClick={() => setIsAuthModalOpen(true)}
-                    className="group relative px-5 py-2.5 rounded-full font-medium text-sm
-                               bg-gradient-to-r from-indigo-500/20 via-purple-500/20 to-pink-500/20
-                               border border-white/20 backdrop-blur-md
-                               hover:border-white/40 hover:from-indigo-500/30 hover:via-purple-500/30 hover:to-pink-500/30
-                               transition-all duration-300
-                               flex items-center gap-2 text-white/90 hover:text-white"
+                    className="px-4 py-2 rounded-lg text-sm font-medium
+                               bg-zinc-800/50 border border-white/10
+                               text-zinc-300 hover:text-white hover:bg-zinc-800
+                               transition-all duration-200"
                   >
-                    <span>Sign In</span>
-                    {/* Holographic glow effect */}
-                    <div className="absolute inset-0 rounded-full bg-gradient-to-r from-indigo-500/0 via-purple-500/20 to-pink-500/0 
-                                    opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300 -z-10" />
+                    Sign In
                   </button>
                 )}
               </div>
@@ -214,49 +196,75 @@ const Index = () => {
           </div>
         </nav>
 
-        {/* Main Content - Floating in the Void */}
-        <main className="flex-1 flex items-center justify-center py-8 mt-16">
-          {appState === "input" && (
-            <div className="w-full max-w-2xl animate-fade-in text-center">
-              {/* Header - Floating Title */}
-              <header className="mb-14">
-                {/* Logo Title - Manrope Extra Bold, industrial geometric */}
-                <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-extrabold uppercase tracking-tight mb-5
-                               text-white">
-                  VISURA AI
-                </h1>
-                
-                <p className="text-white/40 text-xs uppercase tracking-[0.25em] max-w-md mx-auto font-body font-medium">
-                  Decode your subconscious
-                </p>
-              </header>
+        {/* Main Content */}
+        <main className="flex-1 py-8 md:py-12">
+          <div className="max-w-4xl mx-auto px-4">
+            {appState === "input" && (
+              <div className="animate-fade-in">
+                {/* Header */}
+                <header className="mb-8 md:mb-10">
+                  <h1 className="text-3xl md:text-4xl font-bold text-white tracking-tight">
+                    Dream Analysis
+                  </h1>
+                  <p className="text-zinc-400 mt-2 text-sm md:text-base">
+                    AI-powered Jungian interpretation of your subconscious
+                  </p>
+                </header>
 
-              <DreamInput 
-                onSubmit={handleDreamSubmit} 
-                isLoading={false} 
+                {/* Bento Grid */}
+                <div className="grid grid-cols-12 gap-4">
+                  {/* Main Command Center */}
+                  <CommandCenter 
+                    onSubmit={handleDreamSubmit} 
+                    isLoading={false} 
+                  />
+
+                  {/* Stats Widgets Row */}
+                  <div className="col-span-12 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2">
+                    <StatWidget 
+                      icon={Moon}
+                      label="Dreams Recorded"
+                      value={12}
+                      subtext="This month"
+                    />
+                    <StatWidget 
+                      icon={Flame}
+                      label="Current Streak"
+                      value="3 Days"
+                    />
+                    <StatWidget 
+                      icon={Sparkles}
+                      label="Insights Found"
+                      value={47}
+                      subtext="Total patterns"
+                    />
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {appState === "processing" && (
+              <ProcessingScreen />
+            )}
+
+            {appState === "result" && dreamResult && (
+              <DreamResult 
+                result={dreamResult} 
+                onReset={handleReset}
+                isUnlocked={isUnlocked}
+                onUnlockClick={handleUnlockClick}
               />
-            </div>
-          )}
-
-          {appState === "processing" && (
-            <ProcessingScreen />
-          )}
-
-          {appState === "result" && dreamResult && (
-            <DreamResult 
-              result={dreamResult} 
-              onReset={handleReset}
-              isUnlocked={isUnlocked}
-              onUnlockClick={handleUnlockClick}
-            />
-          )}
+            )}
+          </div>
         </main>
 
         {/* Footer */}
-        <footer className="text-center py-6 animate-fade-in">
-          <p className="text-white/30 text-sm font-normal">
-            Powered by Jungian Psychology & AI
-          </p>
+        <footer className="border-t border-white/5 py-6">
+          <div className="max-w-4xl mx-auto px-4">
+            <p className="text-zinc-500 text-sm text-center">
+              Powered by Jungian Psychology & AI
+            </p>
+          </div>
         </footer>
       </div>
 
