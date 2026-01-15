@@ -9,6 +9,7 @@ import DreamInput from "@/components/dream/DreamInput";
 import ProcessingScreen from "@/components/dream/ProcessingScreen";
 import DreamResult from "@/components/dream/DreamResult";
 import AuthModal from "@/components/auth/AuthModal";
+import DigitalDust from "@/components/effects/DigitalDust";
 import { 
   analyzeDream, 
   getSessionId, 
@@ -148,6 +149,9 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Digital Dust - Floating Particles */}
+      <DigitalDust />
+      
       {/* Central Radial Spotlight */}
       <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/25 via-black to-black pointer-events-none" />
       

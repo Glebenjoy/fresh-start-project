@@ -57,27 +57,29 @@ const DreamInput = ({ onSubmit, isLoading }: DreamInputProps) => {
         <span>{dreamText.length} characters</span>
       </div>
 
-      {/* The Amulet Button */}
+      {/* The Amulet Button - Breathing */}
       <div className="flex justify-center">
         <button
           onClick={handleSubmit}
           disabled={isLoading || dreamText.trim().length < 10}
-          className="px-10 py-4 rounded-full text-base font-medium tracking-wide
+          className="group px-10 py-4 rounded-full text-base font-medium tracking-wide
                      bg-gradient-to-r from-violet-600/80 to-indigo-600/80
                      backdrop-blur-md
                      border-t border-t-white/30 border-b border-b-white/5 border-x border-x-white/15
                      ring-1 ring-inset ring-white/20
                      text-white
                      transition-all duration-300 ease-out
+                     animate-button-breathe
                      hover:from-violet-500/90 hover:to-indigo-500/90
                      hover:scale-105
-                     hover:shadow-[0_0_30px_rgba(124,58,237,0.5)]
+                     hover:shadow-[0_0_40px_rgba(124,58,237,0.6)]
                      active:scale-95
                      disabled:opacity-30 disabled:cursor-not-allowed
+                     disabled:animate-none
                      disabled:hover:scale-100 disabled:hover:shadow-none
                      flex items-center gap-3"
         >
-          <Sparkles size={18} strokeWidth={1.5} />
+          <Sparkles size={18} strokeWidth={1.5} className="animate-sparkle" />
           Visualize Dream
         </button>
       </div>

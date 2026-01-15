@@ -157,6 +157,58 @@
     animation: aurora-breathe-alt 35s ease-in-out infinite;
   }
 
+  /* Digital Dust - Floating Particles */
+  @keyframes dust-float {
+    0% {
+      transform: translateY(0) translateX(0);
+      opacity: 0;
+    }
+    10% {
+      opacity: var(--tw-opacity, 0.3);
+    }
+    90% {
+      opacity: var(--tw-opacity, 0.3);
+    }
+    100% {
+      transform: translateY(-100vh) translateX(20px);
+      opacity: 0;
+    }
+  }
+
+  .animate-dust-float {
+    animation: dust-float linear infinite;
+  }
+
+  /* Button Breathing Animation */
+  @keyframes button-breathe {
+    0%, 100% {
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+    }
+    50% {
+      box-shadow: 0 0 35px rgba(139, 92, 246, 0.5);
+    }
+  }
+
+  .animate-button-breathe {
+    animation: button-breathe 3s ease-in-out infinite;
+  }
+
+  /* Sparkle Icon Twinkle */
+  @keyframes sparkle-twinkle {
+    0%, 100% {
+      opacity: 1;
+      transform: scale(1) rotate(0deg);
+    }
+    50% {
+      opacity: 0.7;
+      transform: scale(1.1) rotate(10deg);
+    }
+  }
+
+  .group:hover .animate-sparkle {
+    animation: sparkle-twinkle 0.6s ease-in-out infinite;
+  }
+
   /* Phantom Input - Glass Slab with Top Light Effect */
   .phantom-input {
     @apply bg-white/[0.05] rounded-2xl backdrop-blur-xl;
@@ -167,6 +219,7 @@
     @apply focus:border-t-white/40 focus:border-x-white/20;
     @apply hover:border-t-white/35;
     @apply focus-visible:ring-1 focus-visible:ring-white/10 focus-visible:ring-offset-0;
+    @apply caret-cyan-400;
     font-family: 'Inter', sans-serif;
     scrollbar-width: none;
     -ms-overflow-style: none;
