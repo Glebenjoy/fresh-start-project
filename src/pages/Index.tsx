@@ -148,9 +148,12 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
+      {/* Central Radial Spotlight */}
+      <div className="fixed inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-900/20 via-black to-black pointer-events-none" />
+      
       {/* Living Aurora Background - Deep Breathing Nebula */}
-      <div className="aurora-blob w-[900px] h-[900px] bg-purple-900/30 blur-[120px] top-[-350px] left-[-350px] aurora-breathe" />
-      <div className="aurora-blob w-[700px] h-[700px] bg-cyan-900/30 blur-[120px] bottom-[-250px] right-[-250px] aurora-breathe-alt" />
+      <div className="aurora-blob w-[900px] h-[900px] bg-purple-900/40 blur-[120px] top-[-350px] left-[-350px] aurora-breathe" />
+      <div className="aurora-blob w-[700px] h-[700px] bg-cyan-900/40 blur-[120px] bottom-[-250px] right-[-250px] aurora-breathe-alt" />
       
       <div className="relative z-10 container mx-auto px-4 py-12 min-h-screen flex flex-col">
         {/* Top Navigation Bar */}
@@ -209,14 +212,14 @@ const Index = () => {
           {appState === "input" && (
             <div className="w-full max-w-2xl animate-fade-in text-center">
               {/* Header - Floating Title */}
-              <header className="mb-16">
-                {/* Logo Title - Mystic Cormorant Garamond */}
-                <h1 className="font-mystic text-6xl md:text-7xl lg:text-8xl font-medium italic tracking-wide mb-6
-                               text-white">
-                  VISURA <span className="text-white/60">AI</span>
+              <header className="mb-14">
+                {/* Logo Title - Mystic Cormorant Garamond, fashion-editorial */}
+                <h1 className="font-mystic text-6xl md:text-7xl lg:text-8xl font-medium italic tracking-tight mb-5
+                               text-white/90">
+                  VISURA AI
                 </h1>
                 
-                <p className="text-white/30 text-lg max-w-md mx-auto font-body font-light tracking-wide">
+                <p className="text-white/40 text-lg max-w-md mx-auto font-body font-light tracking-wide">
                   Decode your subconscious
                 </p>
               </header>
