@@ -31,16 +31,16 @@ const CommandCenter = ({ onSubmit, isLoading }: CommandCenterProps) => {
 
   return (
     <div className="col-span-12">
-      {/* Command Center Panel - Ice Glass */}
-      <div className="relative rounded-2xl bg-white/[0.07] backdrop-blur-xl 
-                      border border-white/[0.1]
+      {/* Command Center Panel - Premium Frosted Glass */}
+      <div className="relative rounded-2xl bg-white/[0.03] backdrop-blur-2xl 
+                      border border-white/[0.15]
                       shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]
-                      hover:border-white/[0.15]
+                      hover:border-white/[0.25]
                       transition-all duration-300
                       p-6 md:p-8">
         {/* Header */}
         <div className="mb-6 flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-violet-500/20 border border-violet-400/20 text-violet-300">
+          <div className="p-2.5 rounded-xl bg-violet-500/15 border border-violet-400/25 text-violet-300">
             <PenLine size={18} strokeWidth={1.5} />
           </div>
           <div>
@@ -49,17 +49,17 @@ const CommandCenter = ({ onSubmit, isLoading }: CommandCenterProps) => {
           </div>
         </div>
 
-        {/* Input Area - Clean Slate */}
+        {/* Input Area - Dark Recessed Slate */}
         <div className="relative">
           <Textarea
             value={dreamText}
             onChange={handleTextChange}
             placeholder="I was walking through a forest when suddenly..."
-            className="w-full min-h-[180px] bg-black/40 border border-white/[0.08] rounded-xl
+            className="w-full min-h-[180px] bg-black/40 border border-white/[0.1] rounded-xl
                        text-white text-base leading-relaxed p-5 resize-none
                        placeholder:text-zinc-500 placeholder:italic
-                       focus:border-violet-400/50 focus:bg-black/50
-                       focus:ring-1 focus:ring-violet-400/30
+                       focus:border-violet-400/40 focus:bg-black/50
+                       focus:ring-1 focus:ring-violet-400/20
                        focus-visible:ring-offset-0 transition-all duration-300
                        caret-violet-400"
             disabled={isLoading}
@@ -68,8 +68,8 @@ const CommandCenter = ({ onSubmit, isLoading }: CommandCenterProps) => {
           {/* Voice Button */}
           <button 
             className="absolute bottom-4 right-4 p-2.5 rounded-lg
-                       bg-white/[0.05] border border-white/[0.08]
-                       text-zinc-400 hover:text-white hover:bg-white/[0.1] hover:border-white/[0.15]
+                       bg-white/[0.05] border border-white/[0.1]
+                       text-zinc-400 hover:text-white hover:bg-white/[0.1] hover:border-white/[0.2]
                        transition-all duration-200"
             disabled={isLoading}
           >
@@ -83,7 +83,7 @@ const CommandCenter = ({ onSubmit, isLoading }: CommandCenterProps) => {
             {dreamText.length} characters
           </span>
 
-          {/* Prism Trigger Button - Dark Glass + Neon Border */}
+          {/* Prism Trigger Button */}
           <button
             onClick={handleSubmit}
             disabled={isLoading || dreamText.trim().length < 10}

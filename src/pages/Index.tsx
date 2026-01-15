@@ -146,17 +146,21 @@ const Index = () => {
       {/* Digital Dust Particles */}
       <DigitalDust />
       
-      {/* Massive Violet/Indigo Spotlight - The Core Glow */}
+      {/* Massive Violet/Indigo Spotlight - IGNITED */}
       <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] 
-                      from-indigo-900/40 via-violet-950/20 to-black pointer-events-none" />
+                      from-indigo-600/30 via-purple-900/15 to-black pointer-events-none" />
       
-      {/* Secondary Purple Orb Glow */}
-      <div className="fixed top-[20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] 
-                      bg-violet-600/15 blur-[150px] rounded-full pointer-events-none" />
+      {/* Primary Purple Orb - Bright Core */}
+      <div className="fixed top-[15%] left-1/2 -translate-x-1/2 w-[1000px] h-[700px] 
+                      bg-violet-500/20 blur-[180px] rounded-full pointer-events-none" />
+      
+      {/* Secondary Indigo Wash */}
+      <div className="fixed top-[30%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] 
+                      bg-indigo-400/15 blur-[120px] rounded-full pointer-events-none" />
       
       {/* Accent Cyan Edge Glow */}
-      <div className="fixed bottom-0 right-0 w-[500px] h-[400px] 
-                      bg-cyan-500/10 blur-[120px] rounded-full pointer-events-none" />
+      <div className="fixed bottom-[-10%] right-[-5%] w-[600px] h-[500px] 
+                      bg-cyan-500/12 blur-[150px] rounded-full pointer-events-none" />
       
       {/* Film grain noise texture overlay */}
       <div className="fixed inset-0 opacity-[0.03] pointer-events-none"
