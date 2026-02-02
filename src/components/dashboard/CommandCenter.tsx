@@ -31,51 +31,47 @@ const CommandCenter = ({ onSubmit, isLoading }: CommandCenterProps) => {
 
   return (
     <div className="w-full">
-      {/* Command Center Panel - Ultra-Clear Glass */}
-      <div className="relative rounded-[32px] 
+      {/* Main Input Card - Purple Glow Centerpiece */}
+      <div className="relative rounded-[28px] h-64
                       bg-white/[0.03] backdrop-blur-2xl 
-                      border border-white/[0.15]
-                      shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]
-                      p-8 md:p-10">
+                      border border-violet-500/30
+                      shadow-[0_0_30px_rgba(124,58,237,0.15),inset_0_1px_0_0_rgba(255,255,255,0.1)]
+                      p-6 flex flex-col">
         
-        {/* Input Area */}
-        <div className="relative">
+        {/* Textarea - Takes top ~80% */}
+        <div className="flex-1">
           <Textarea
             value={dreamText}
             onChange={handleTextChange}
             placeholder="I was walking through a forest when suddenly..."
-            className="w-full min-h-[180px] bg-transparent border-0
-                       text-white text-xl leading-relaxed p-0 resize-none
-                       placeholder:text-white/30
-                       focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0
-                       transition-all duration-300"
+            className="w-full h-full bg-transparent border-0
+                       text-white text-lg leading-relaxed p-0 resize-none
+                       placeholder:text-white/25
+                       focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0"
             disabled={isLoading}
           />
         </div>
 
-        {/* Subtle divider */}
-        <div className="h-px bg-white/[0.08] my-8" />
-
-        {/* Footer with Counter & Visualize Button */}
-        <div className="flex items-center justify-between">
-          <span className="text-xs text-white/40 uppercase tracking-[0.2em] font-medium">
+        {/* Footer - Character count left, Button right */}
+        <div className="flex items-center justify-between pt-4 border-t border-white/[0.06]">
+          <span className="text-xs text-white/30 uppercase tracking-[0.15em] font-medium">
             {dreamText.length} characters
           </span>
 
-          {/* Visualize Button - Neon Capsule */}
+          {/* Visualize Button - Small Capsule inside card */}
           <button
             onClick={handleSubmit}
             disabled={isLoading || dreamText.trim().length < 10}
-            className="rounded-full bg-gradient-to-r from-[#6366f1] to-[#a855f7] 
-                       px-8 py-4 text-lg font-bold tracking-widest text-white 
-                       shadow-[0_0_30px_rgba(139,92,246,0.5)] 
-                       hover:scale-105 hover:shadow-[0_0_40px_rgba(139,92,246,0.7)]
+            className="rounded-full bg-gradient-to-r from-violet-600 to-fuchsia-500 
+                       px-6 py-2.5 text-sm font-bold tracking-widest text-white uppercase
+                       shadow-[0_0_20px_rgba(139,92,246,0.4)] 
+                       hover:scale-105 hover:shadow-[0_0_25px_rgba(139,92,246,0.6)]
                        active:scale-95
                        transition-all duration-300
                        disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:scale-100
-                       flex items-center gap-3 uppercase"
+                       flex items-center gap-2"
           >
-            <Sparkles size={18} strokeWidth={2} />
+            <Sparkles size={14} strokeWidth={2} />
             Visualize
           </button>
         </div>
