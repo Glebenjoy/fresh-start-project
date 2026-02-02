@@ -31,10 +31,10 @@ const CommandCenter = ({ onSubmit, isLoading }: CommandCenterProps) => {
 
   return (
     <div className="w-full">
-      {/* Command Center Panel - High-Contrast Glass */}
-      <div className="relative rounded-3xl bg-white/10 backdrop-blur-2xl 
-                      border border-white/20
-                      shadow-[0_0_60px_rgba(139,92,246,0.25)]
+      {/* Command Center Panel - Soft Glass */}
+      <div className="relative rounded-3xl bg-white/[0.02] backdrop-blur-xl 
+                      border border-white/[0.08]
+                      shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05),0_0_40px_rgba(124,58,237,0.15)]
                       p-8 md:p-10">
         
         {/* Input Area */}
@@ -45,43 +45,40 @@ const CommandCenter = ({ onSubmit, isLoading }: CommandCenterProps) => {
             placeholder="I was walking through a forest when suddenly..."
             className="w-full min-h-[180px] bg-transparent border-0
                        text-white text-lg leading-relaxed p-0 resize-none
-                       placeholder:text-white/40
+                       placeholder:text-zinc-500
                        focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0
                        transition-all duration-300
                        caret-violet-400"
-            style={{ fontFamily: "'Cormorant', serif" }}
+            style={{ fontFamily: "'Manrope', sans-serif", fontWeight: 400 }}
             disabled={isLoading}
           />
         </div>
 
         {/* Subtle divider */}
-        <div className="h-px bg-white/10 my-6" />
+        <div className="h-px bg-white/[0.06] my-6" />
 
         {/* Footer with Counter & Visualize Button */}
         <div className="flex items-center justify-between">
-          <span className="text-[10px] text-white/40 uppercase tracking-[0.25em]"
-                style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+          <span className="text-[10px] text-zinc-500 uppercase tracking-[0.2em] font-medium">
             {dreamText.length} characters
           </span>
 
-          {/* Visualize Button - Bright Gradient */}
+          {/* Visualize Button - Hero Capsule */}
           <button
             onClick={handleSubmit}
             disabled={isLoading || dreamText.trim().length < 10}
-            className="group px-8 py-3 rounded-full 
-                       text-sm font-bold uppercase tracking-[0.15em]
-                       bg-gradient-to-r from-violet-600 via-fuchsia-500 to-pink-500
-                       border border-white/20
-                       shadow-[0_0_30px_rgba(168,85,247,0.5)]
+            className="group px-8 py-3.5 rounded-full 
+                       text-sm font-bold uppercase tracking-widest
+                       bg-gradient-to-r from-violet-600 to-indigo-600
+                       shadow-[0_0_20px_rgba(124,58,237,0.4)]
                        text-white
                        transition-all duration-300 ease-out
-                       hover:shadow-[0_0_50px_rgba(168,85,247,0.7)]
-                       hover:scale-105 hover:brightness-110
-                       active:scale-95
+                       hover:shadow-[0_0_30px_rgba(124,58,237,0.6)]
+                       hover:scale-[1.02] hover:brightness-110
+                       active:scale-[0.98]
                        disabled:opacity-40 disabled:cursor-not-allowed
-                       disabled:hover:scale-100 disabled:hover:shadow-[0_0_30px_rgba(168,85,247,0.5)]
+                       disabled:hover:scale-100 disabled:hover:shadow-[0_0_20px_rgba(124,58,237,0.4)]
                        flex items-center gap-3"
-            style={{ fontFamily: "'Space Grotesk', sans-serif" }}
           >
             <Sparkles size={16} strokeWidth={2} className="opacity-90" />
             Visualize

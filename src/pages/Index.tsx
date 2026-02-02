@@ -201,14 +201,10 @@ const Index = () => {
                 <header className="flex items-center justify-between">
                   {/* Left: Greeting */}
                   <div>
-                    <h1 
-                      className="text-4xl md:text-5xl font-light italic text-white"
-                      style={{ fontFamily: "'Cormorant', serif" }}
-                    >
+                    <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
                       {greeting}, {getUserDisplayName()}
                     </h1>
-                    <p className="text-xs text-white/50 mt-2 uppercase tracking-[0.2em]"
-                       style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    <p className="text-xs text-zinc-500 mt-2 uppercase tracking-[0.2em] font-medium">
                       What did you dream?
                     </p>
                   </div>
@@ -217,17 +213,18 @@ const Index = () => {
                   <div className="flex items-center gap-3">
                     {/* Streak Indicator */}
                     <div className="flex items-center gap-2 px-4 py-2 rounded-full
-                                    bg-white/5 border border-white/15">
+                                    bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl
+                                    shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]">
                       <Flame size={14} className="text-orange-400" strokeWidth={1.5} />
-                      <span className="text-xs text-white/70 tracking-wide"
-                            style={{ fontFamily: "'Space Grotesk', sans-serif" }}>0 Days</span>
+                      <span className="text-xs text-zinc-400 tracking-wide font-medium">0 Days</span>
                     </div>
 
                     {user ? (
                       <Link to="/journal">
                         <button className="p-2.5 rounded-full
-                                           bg-white/5 border border-white/15
-                                           text-white/70 hover:text-white hover:bg-white/10 hover:border-white/25
+                                           bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl
+                                           shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]
+                                           text-zinc-400 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.15]
                                            transition-all duration-300">
                           <BookOpen size={16} strokeWidth={1.5} />
                         </button>
@@ -235,11 +232,11 @@ const Index = () => {
                     ) : (
                       <button 
                         onClick={() => setIsAuthModalOpen(true)}
-                        className="px-4 py-2 rounded-full text-xs uppercase tracking-[0.15em]
-                                   bg-white/5 border border-white/15
-                                   text-white/70 hover:text-white hover:bg-white/10 hover:border-white/25
-                                   transition-all duration-300"
-                        style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                        className="px-4 py-2 rounded-full text-xs uppercase tracking-[0.15em] font-semibold
+                                   bg-white/[0.03] border border-white/[0.08] backdrop-blur-xl
+                                   shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]
+                                   text-zinc-400 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.15]
+                                   transition-all duration-300">
                         Sign In
                       </button>
                     )}
@@ -248,8 +245,7 @@ const Index = () => {
 
                 {/* ===== SECTION 2: Emotion Check-in ===== */}
                 <section className="space-y-4">
-                  <h2 className="text-xs uppercase tracking-[0.2em] text-white/50"
-                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                  <h2 className="text-xs uppercase tracking-[0.2em] text-zinc-500 font-medium">
                     Current Mood
                   </h2>
                   <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
@@ -296,16 +292,16 @@ const Index = () => {
         </div>
 
         {/* Footer */}
-        <footer className="border-t border-white/5 py-6">
+        <footer className="border-t border-white/[0.06] py-6">
           <div className="max-w-2xl mx-auto px-4">
             <div className="flex items-center justify-between">
               <Link 
                 to="/" 
-                className="text-lg font-bold tracking-tight text-white/60 hover:text-white transition-colors"
+                className="text-lg font-extrabold tracking-tight text-zinc-500 hover:text-white transition-colors"
               >
                 VISURA
               </Link>
-              <p className="text-zinc-600 text-xs">
+              <p className="text-zinc-600 text-xs font-medium">
                 Powered by Jungian Psychology & AI
               </p>
             </div>
