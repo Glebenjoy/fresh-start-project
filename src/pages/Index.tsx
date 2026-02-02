@@ -166,28 +166,24 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black relative overflow-hidden">
+    <div className="min-h-screen bg-[#000000] relative overflow-hidden">
       {/* Digital Dust Particles */}
       <DigitalDust />
       
-      {/* Massive Violet/Indigo Spotlight - IGNITED */}
-      <div className="fixed inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] 
-                      from-indigo-600/30 via-purple-900/15 to-black pointer-events-none" />
+      {/* Subtle Violet Spotlight - Top Center */}
+      <div className="fixed top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] 
+                      bg-violet-600/15 blur-[200px] rounded-full pointer-events-none" />
       
-      {/* Primary Purple Orb - Bright Core */}
-      <div className="fixed top-[15%] left-1/2 -translate-x-1/2 w-[1000px] h-[700px] 
-                      bg-violet-500/20 blur-[180px] rounded-full pointer-events-none" />
+      {/* Secondary Indigo Accent - Subtle */}
+      <div className="fixed top-[40%] left-1/2 -translate-x-1/2 w-[500px] h-[300px] 
+                      bg-indigo-500/8 blur-[150px] rounded-full pointer-events-none" />
       
-      {/* Secondary Indigo Wash */}
-      <div className="fixed top-[30%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] 
-                      bg-indigo-400/15 blur-[120px] rounded-full pointer-events-none" />
-      
-      {/* Accent Cyan Edge Glow */}
-      <div className="fixed bottom-[-10%] right-[-5%] w-[600px] h-[500px] 
-                      bg-cyan-500/12 blur-[150px] rounded-full pointer-events-none" />
+      {/* Edge Glow - Very Subtle */}
+      <div className="fixed bottom-[-15%] right-[-10%] w-[400px] h-[400px] 
+                      bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
       
       {/* Film grain noise texture overlay */}
-      <div className="fixed inset-0 opacity-[0.03] pointer-events-none"
+      <div className="fixed inset-0 opacity-[0.04] pointer-events-none"
            style={{ 
              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E")`,
              backgroundRepeat: 'repeat'
@@ -206,12 +202,12 @@ const Index = () => {
                   {/* Left: Greeting */}
                   <div>
                     <h1 
-                      className="text-3xl md:text-4xl font-semibold text-white"
+                      className="text-4xl md:text-5xl font-light italic text-white/90"
                       style={{ fontFamily: "'Cormorant', serif" }}
                     >
                       {greeting}, {getUserDisplayName()}
                     </h1>
-                    <p className="text-xs text-zinc-500 mt-1 uppercase tracking-[0.15em]"
+                    <p className="text-[10px] text-white/30 mt-2 uppercase tracking-[0.25em]"
                        style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                       What did you dream?
                     </p>
@@ -220,29 +216,33 @@ const Index = () => {
                   {/* Right: Streak + Journal */}
                   <div className="flex items-center gap-3">
                     {/* Streak Indicator */}
-                    <div className="flex items-center gap-2 px-4 py-2 rounded-xl
-                                    bg-white/[0.03] backdrop-blur-xl border border-white/[0.08]">
-                      <Flame size={16} className="text-orange-400/70" strokeWidth={1.5} />
-                      <span className="text-sm font-medium text-zinc-400">0 Days</span>
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-full
+                                    bg-transparent border border-white/10">
+                      <Flame size={14} className="text-orange-400/60" strokeWidth={1.5} />
+                      <span className="text-xs text-white/40 tracking-wide"
+                            style={{ fontFamily: "'Space Grotesk', sans-serif" }}>0 Days</span>
                     </div>
 
                     {/* Journal Button */}
                     {user ? (
                       <Link to="/journal">
-                        <button className="p-2.5 rounded-xl
-                                           bg-white/[0.03] backdrop-blur-xl border border-white/[0.08]
-                                           text-zinc-400 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.15]
-                                           transition-all duration-200">
-                          <BookOpen size={18} strokeWidth={1.5} />
+                        <button className="p-2.5 rounded-full
+                                           bg-transparent border border-white/10
+                                           text-white/40 hover:text-white/80 hover:border-white/25
+                                           hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]
+                                           transition-all duration-300">
+                          <BookOpen size={16} strokeWidth={1.5} />
                         </button>
                       </Link>
                     ) : (
                       <button 
                         onClick={() => setIsAuthModalOpen(true)}
-                        className="px-4 py-2 rounded-xl text-sm font-medium
-                                   bg-white/[0.03] backdrop-blur-xl border border-white/[0.08]
-                                   text-zinc-400 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.15]
-                                   transition-all duration-200">
+                        className="px-4 py-2 rounded-full text-xs uppercase tracking-[0.15em]
+                                   bg-transparent border border-white/10
+                                   text-white/40 hover:text-white/80 hover:border-white/25
+                                   hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]
+                                   transition-all duration-300"
+                        style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                         Sign In
                       </button>
                     )}
@@ -250,8 +250,8 @@ const Index = () => {
                 </header>
 
                 {/* ===== SECTION 2: Emotion Check-in ===== */}
-                <section className="space-y-3">
-                  <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500"
+                <section className="space-y-4">
+                  <h2 className="text-[10px] uppercase tracking-[0.25em] text-white/30"
                       style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                     Current Mood
                   </h2>
