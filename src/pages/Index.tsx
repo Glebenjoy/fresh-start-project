@@ -2,10 +2,11 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
-import { BookOpen, Moon, Flame, Sparkles } from "lucide-react";
+import { BookOpen, Flame } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import CommandCenter from "@/components/dashboard/CommandCenter";
-import StatWidget from "@/components/dashboard/StatWidget";
+import MoodChip from "@/components/dashboard/MoodChip";
+import RecentDreams from "@/components/dashboard/RecentDreams";
 import ProcessingScreen from "@/components/dream/ProcessingScreen";
 import DreamResult from "@/components/dream/DreamResult";
 import AuthModal from "@/components/auth/AuthModal";
@@ -23,6 +24,8 @@ import {
 
 type AppState = "input" | "processing" | "result";
 
+const MOODS = ["Anxious", "Calm", "Inspired", "Tired", "Mystical"];
+
 const Index = () => {
   const { toast } = useToast();
   const [appState, setAppState] = useState<AppState>("input");
@@ -32,6 +35,20 @@ const Index = () => {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
   const [isUnlocked, setIsUnlocked] = useState(false);
   const [currentDreamId, setCurrentDreamId] = useState<string | null>(null);
+  const [selectedMood, setSelectedMood] = useState<string | null>(null);
+  const [greeting, setGreeting] = useState("Good Evening");
+
+  // Set greeting based on time of day
+  useEffect(() => {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 12) {
+      setGreeting("Good Morning");
+    } else if (hour >= 12 && hour < 17) {
+      setGreeting("Good Afternoon");
+    } else {
+      setGreeting("Good Evening");
+    }
+  }, []);
 
   // Restore state from localStorage on mount
   useEffect(() => {
@@ -141,6 +158,13 @@ const Index = () => {
     }
   };
 
+  const getUserDisplayName = () => {
+    if (!user) return "Dreamer";
+    return user.user_metadata?.full_name?.split(" ")[0] || 
+           user.email?.split("@")[0] || 
+           "Dreamer";
+  };
+
   return (
     <div className="min-h-screen bg-black relative overflow-hidden">
       {/* Digital Dust Particles */}
@@ -170,95 +194,92 @@ const Index = () => {
            }} />
 
       <div className="relative z-10 min-h-screen flex flex-col">
-        {/* Top Navigation */}
-        <nav className="border-b border-white/[0.06] backdrop-blur-2xl bg-white/[0.02]">
-          <div className="max-w-4xl mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
-              {/* Logo */}
-              <Link 
-                to="/" 
-                className="text-xl font-bold tracking-tight 
-                           bg-clip-text text-transparent bg-gradient-to-r from-white to-white/70
-                           hover:from-white hover:to-white/90 transition-all duration-300"
-              >
-                VISURA
-              </Link>
-
-              {/* Right Side */}
-              <div className="flex items-center gap-2">
-                {user ? (
-                  <Link to="/journal">
-                    <button className="px-4 py-2 rounded-xl text-sm font-medium
-                                       bg-white/[0.03] backdrop-blur-xl border border-white/[0.08]
-                                       shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]
-                                       text-zinc-300 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.12]
-                                       transition-all duration-200
-                                       flex items-center gap-2">
-                      <BookOpen size={16} strokeWidth={1.5} />
-                      Journal
-                    </button>
-                  </Link>
-                ) : (
-                  <button 
-                    onClick={() => setIsAuthModalOpen(true)}
-                    className="px-4 py-2 rounded-xl text-sm font-medium
-                               bg-white/[0.03] backdrop-blur-xl border border-white/[0.08]
-                               shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)]
-                               text-zinc-300 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.12]
-                               transition-all duration-200"
-                  >
-                    Sign In
-                  </button>
-                )}
-              </div>
-            </div>
-          </div>
-        </nav>
-
-        {/* Main Content */}
-        <main className="flex-1 py-8 md:py-12">
-          <div className="max-w-4xl mx-auto px-4">
+        {/* Main Content Container */}
+        <div className="flex-1 py-6 md:py-10">
+          <div className="max-w-2xl mx-auto px-4 space-y-8">
+            
             {appState === "input" && (
-              <div className="animate-fade-in">
-                {/* Header */}
-                <header className="mb-10 md:mb-14">
-                  <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tight text-white">
-                    Dream Analysis
-                  </h1>
-                  <p className="text-xs md:text-sm text-zinc-400 mt-4 uppercase tracking-[0.2em] font-medium">
-                    AI-powered Jungian interpretation
-                  </p>
+              <div className="animate-fade-in space-y-8">
+                
+                {/* ===== SECTION 1: Header ===== */}
+                <header className="flex items-center justify-between">
+                  {/* Left: Greeting */}
+                  <div>
+                    <h1 
+                      className="text-3xl md:text-4xl font-semibold text-white"
+                      style={{ fontFamily: "'Cormorant', serif" }}
+                    >
+                      {greeting}, {getUserDisplayName()}
+                    </h1>
+                    <p className="text-xs text-zinc-500 mt-1 uppercase tracking-[0.15em]"
+                       style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                      What did you dream?
+                    </p>
+                  </div>
+
+                  {/* Right: Streak + Journal */}
+                  <div className="flex items-center gap-3">
+                    {/* Streak Indicator */}
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-xl
+                                    bg-white/[0.03] backdrop-blur-xl border border-white/[0.08]">
+                      <Flame size={16} className="text-orange-400/70" strokeWidth={1.5} />
+                      <span className="text-sm font-medium text-zinc-400">0 Days</span>
+                    </div>
+
+                    {/* Journal Button */}
+                    {user ? (
+                      <Link to="/journal">
+                        <button className="p-2.5 rounded-xl
+                                           bg-white/[0.03] backdrop-blur-xl border border-white/[0.08]
+                                           text-zinc-400 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.15]
+                                           transition-all duration-200">
+                          <BookOpen size={18} strokeWidth={1.5} />
+                        </button>
+                      </Link>
+                    ) : (
+                      <button 
+                        onClick={() => setIsAuthModalOpen(true)}
+                        className="px-4 py-2 rounded-xl text-sm font-medium
+                                   bg-white/[0.03] backdrop-blur-xl border border-white/[0.08]
+                                   text-zinc-400 hover:text-white hover:bg-white/[0.06] hover:border-white/[0.15]
+                                   transition-all duration-200">
+                        Sign In
+                      </button>
+                    )}
+                  </div>
                 </header>
 
-                {/* Bento Grid */}
-                <div className="grid grid-cols-12 gap-4">
-                  {/* Main Command Center */}
+                {/* ===== SECTION 2: Emotion Check-in ===== */}
+                <section className="space-y-3">
+                  <h2 className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500"
+                      style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+                    Current Mood
+                  </h2>
+                  <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
+                    {MOODS.map((mood) => (
+                      <MoodChip
+                        key={mood}
+                        label={mood}
+                        isSelected={selectedMood === mood}
+                        onClick={() => setSelectedMood(selectedMood === mood ? null : mood)}
+                      />
+                    ))}
+                  </div>
+                </section>
+
+                {/* ===== SECTION 3: Main Control Card ===== */}
+                <section>
                   <CommandCenter 
                     onSubmit={handleDreamSubmit} 
                     isLoading={false} 
                   />
+                </section>
 
-                  {/* Stats Widgets Row */}
-                  <div className="col-span-12 grid grid-cols-1 sm:grid-cols-3 gap-4 mt-2">
-                    <StatWidget 
-                      icon={Moon}
-                      label="Dreams Recorded"
-                      value={12}
-                      subtext="This month"
-                    />
-                    <StatWidget 
-                      icon={Flame}
-                      label="Current Streak"
-                      value="3 Days"
-                    />
-                    <StatWidget 
-                      icon={Sparkles}
-                      label="Insights Found"
-                      value={47}
-                      subtext="Total patterns"
-                    />
-                  </div>
-                </div>
+                {/* ===== SECTION 4: Recent Dreams ===== */}
+                <section>
+                  <RecentDreams />
+                </section>
+
               </div>
             )}
 
@@ -275,14 +296,22 @@ const Index = () => {
               />
             )}
           </div>
-        </main>
+        </div>
 
         {/* Footer */}
         <footer className="border-t border-white/5 py-6">
-          <div className="max-w-4xl mx-auto px-4">
-            <p className="text-zinc-500 text-sm text-center">
-              Powered by Jungian Psychology & AI
-            </p>
+          <div className="max-w-2xl mx-auto px-4">
+            <div className="flex items-center justify-between">
+              <Link 
+                to="/" 
+                className="text-lg font-bold tracking-tight text-white/60 hover:text-white transition-colors"
+              >
+                VISURA
+              </Link>
+              <p className="text-zinc-600 text-xs">
+                Powered by Jungian Psychology & AI
+              </p>
+            </div>
           </div>
         </footer>
       </div>

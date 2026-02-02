@@ -30,22 +30,23 @@ const CommandCenter = ({ onSubmit, isLoading }: CommandCenterProps) => {
   };
 
   return (
-    <div className="col-span-12">
-      {/* Command Center Panel - Premium Frosted Glass */}
-      <div className="relative rounded-2xl bg-white/[0.03] backdrop-blur-2xl 
-                      border border-white/[0.15]
-                      shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]
-                      hover:border-white/[0.25]
-                      transition-all duration-300
+    <div className="w-full">
+      {/* Command Center Panel - Large Glass Card */}
+      <div className="relative rounded-3xl bg-zinc-900/40 backdrop-blur-xl 
+                      border border-white/10
+                      shadow-[inset_0_1px_0_0_rgba(255,255,255,0.06)]
                       p-6 md:p-8">
         {/* Header */}
-        <div className="mb-6 flex items-center gap-3">
-          <div className="p-2.5 rounded-xl bg-violet-500/15 border border-violet-400/25 text-violet-300">
-            <PenLine size={18} strokeWidth={1.5} />
+        <div className="mb-5 flex items-center gap-3">
+          <div className="p-2 rounded-lg bg-violet-500/15 border border-violet-400/20 text-violet-300">
+            <PenLine size={16} strokeWidth={1.5} />
           </div>
           <div>
-            <h2 className="text-sm font-bold text-white tracking-tight uppercase">Dream Input</h2>
-            <p className="text-xs text-zinc-400 mt-0.5">Describe your dream in detail</p>
+            <h2 className="text-sm font-semibold text-white tracking-tight uppercase"
+                style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+              Dream Input
+            </h2>
+            <p className="text-xs text-zinc-500 mt-0.5">Describe your dream in detail</p>
           </div>
         </div>
 
@@ -55,10 +56,10 @@ const CommandCenter = ({ onSubmit, isLoading }: CommandCenterProps) => {
             value={dreamText}
             onChange={handleTextChange}
             placeholder="I was walking through a forest when suddenly..."
-            className="w-full min-h-[180px] bg-black/40 border border-white/[0.1] rounded-xl
+            className="w-full min-h-[160px] bg-black/50 border border-white/[0.08] rounded-xl
                        text-white text-base leading-relaxed p-5 resize-none
-                       placeholder:text-zinc-500 placeholder:italic
-                       focus:border-violet-400/40 focus:bg-black/50
+                       placeholder:text-zinc-600 placeholder:italic
+                       focus:border-violet-400/40 focus:bg-black/60
                        focus:ring-1 focus:ring-violet-400/20
                        focus-visible:ring-offset-0 transition-all duration-300
                        caret-violet-400"
@@ -67,19 +68,19 @@ const CommandCenter = ({ onSubmit, isLoading }: CommandCenterProps) => {
           
           {/* Voice Button */}
           <button 
-            className="absolute bottom-4 right-4 p-2.5 rounded-lg
-                       bg-white/[0.05] border border-white/[0.1]
-                       text-zinc-400 hover:text-white hover:bg-white/[0.1] hover:border-white/[0.2]
+            className="absolute bottom-4 right-4 p-2 rounded-lg
+                       bg-white/[0.03] border border-white/[0.08]
+                       text-zinc-500 hover:text-white hover:bg-white/[0.08]
                        transition-all duration-200"
             disabled={isLoading}
           >
-            <Mic size={16} strokeWidth={1.5} />
+            <Mic size={14} strokeWidth={1.5} />
           </button>
         </div>
 
         {/* Footer with Counter & Prism Trigger Button */}
         <div className="mt-5 flex items-center justify-between">
-          <span className="text-[11px] text-zinc-500 font-medium uppercase tracking-widest">
+          <span className="text-[11px] text-zinc-600 font-medium uppercase tracking-widest">
             {dreamText.length} characters
           </span>
 
@@ -87,24 +88,24 @@ const CommandCenter = ({ onSubmit, isLoading }: CommandCenterProps) => {
           <button
             onClick={handleSubmit}
             disabled={isLoading || dreamText.trim().length < 10}
-            className="group px-8 py-3 rounded-full 
-                       font-semibold text-sm uppercase tracking-[0.15em]
-                       bg-black/60 backdrop-blur-md
-                       border border-violet-400/70
-                       shadow-[inset_0_0_20px_rgba(139,92,246,0.25)]
+            className="group px-7 py-2.5 rounded-full 
+                       font-semibold text-sm uppercase tracking-[0.12em]
+                       bg-black/70 backdrop-blur-md
+                       border border-violet-400/60
+                       shadow-[inset_0_0_15px_rgba(139,92,246,0.2)]
                        text-white
                        transition-all duration-300 ease-out
                        animate-prism-pulse
                        hover:bg-violet-500/20 hover:border-violet-300
-                       hover:shadow-[inset_0_0_30px_rgba(139,92,246,0.4),0_0_40px_rgba(139,92,246,0.5)]
-                       active:shadow-[inset_0_0_40px_rgba(139,92,246,0.6),0_0_50px_rgba(139,92,246,0.7)]
+                       hover:shadow-[inset_0_0_25px_rgba(139,92,246,0.35),0_0_35px_rgba(139,92,246,0.45)]
+                       active:shadow-[inset_0_0_35px_rgba(139,92,246,0.5),0_0_45px_rgba(139,92,246,0.6)]
                        disabled:opacity-30 disabled:cursor-not-allowed
                        disabled:animate-none
-                       disabled:hover:bg-black/60 disabled:hover:border-violet-400/70 
-                       disabled:hover:shadow-[inset_0_0_20px_rgba(139,92,246,0.25)]
-                       flex items-center gap-3"
+                       disabled:hover:bg-black/70 disabled:hover:border-violet-400/60 
+                       disabled:hover:shadow-[inset_0_0_15px_rgba(139,92,246,0.2)]
+                       flex items-center gap-2.5"
           >
-            <Sparkles size={16} strokeWidth={2} className="opacity-70 group-hover:opacity-100 transition-opacity" />
+            <Sparkles size={14} strokeWidth={2} className="opacity-70 group-hover:opacity-100 transition-opacity" />
             Visualize
           </button>
         </div>
