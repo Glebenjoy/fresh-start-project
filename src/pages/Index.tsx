@@ -170,17 +170,17 @@ const Index = () => {
       {/* Digital Dust Particles */}
       <DigitalDust />
       
-      {/* Subtle Violet Spotlight - Top Center */}
-      <div className="fixed top-[-20%] left-1/2 -translate-x-1/2 w-[800px] h-[600px] 
-                      bg-violet-600/15 blur-[200px] rounded-full pointer-events-none" />
+      {/* Primary Violet Spotlight - Brighter */}
+      <div className="fixed top-[-10%] left-1/2 -translate-x-1/2 w-[1000px] h-[700px] 
+                      bg-violet-600/25 blur-[180px] rounded-full pointer-events-none" />
       
-      {/* Secondary Indigo Accent - Subtle */}
-      <div className="fixed top-[40%] left-1/2 -translate-x-1/2 w-[500px] h-[300px] 
-                      bg-indigo-500/8 blur-[150px] rounded-full pointer-events-none" />
+      {/* Secondary Indigo Accent */}
+      <div className="fixed top-[30%] left-1/2 -translate-x-1/2 w-[600px] h-[400px] 
+                      bg-indigo-500/15 blur-[150px] rounded-full pointer-events-none" />
       
-      {/* Edge Glow - Very Subtle */}
-      <div className="fixed bottom-[-15%] right-[-10%] w-[400px] h-[400px] 
-                      bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
+      {/* Bottom Edge Glow */}
+      <div className="fixed bottom-[-10%] right-[-5%] w-[500px] h-[500px] 
+                      bg-fuchsia-500/10 blur-[150px] rounded-full pointer-events-none" />
       
       {/* Film grain noise texture overlay */}
       <div className="fixed inset-0 opacity-[0.04] pointer-events-none"
@@ -202,12 +202,12 @@ const Index = () => {
                   {/* Left: Greeting */}
                   <div>
                     <h1 
-                      className="text-4xl md:text-5xl font-light italic text-white/90"
+                      className="text-4xl md:text-5xl font-light italic text-white"
                       style={{ fontFamily: "'Cormorant', serif" }}
                     >
                       {greeting}, {getUserDisplayName()}
                     </h1>
-                    <p className="text-[10px] text-white/30 mt-2 uppercase tracking-[0.25em]"
+                    <p className="text-xs text-white/50 mt-2 uppercase tracking-[0.2em]"
                        style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                       What did you dream?
                     </p>
@@ -217,19 +217,17 @@ const Index = () => {
                   <div className="flex items-center gap-3">
                     {/* Streak Indicator */}
                     <div className="flex items-center gap-2 px-4 py-2 rounded-full
-                                    bg-transparent border border-white/10">
-                      <Flame size={14} className="text-orange-400/60" strokeWidth={1.5} />
-                      <span className="text-xs text-white/40 tracking-wide"
+                                    bg-white/5 border border-white/15">
+                      <Flame size={14} className="text-orange-400" strokeWidth={1.5} />
+                      <span className="text-xs text-white/70 tracking-wide"
                             style={{ fontFamily: "'Space Grotesk', sans-serif" }}>0 Days</span>
                     </div>
 
-                    {/* Journal Button */}
                     {user ? (
                       <Link to="/journal">
                         <button className="p-2.5 rounded-full
-                                           bg-transparent border border-white/10
-                                           text-white/40 hover:text-white/80 hover:border-white/25
-                                           hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]
+                                           bg-white/5 border border-white/15
+                                           text-white/70 hover:text-white hover:bg-white/10 hover:border-white/25
                                            transition-all duration-300">
                           <BookOpen size={16} strokeWidth={1.5} />
                         </button>
@@ -238,9 +236,8 @@ const Index = () => {
                       <button 
                         onClick={() => setIsAuthModalOpen(true)}
                         className="px-4 py-2 rounded-full text-xs uppercase tracking-[0.15em]
-                                   bg-transparent border border-white/10
-                                   text-white/40 hover:text-white/80 hover:border-white/25
-                                   hover:shadow-[0_0_15px_rgba(255,255,255,0.1)]
+                                   bg-white/5 border border-white/15
+                                   text-white/70 hover:text-white hover:bg-white/10 hover:border-white/25
                                    transition-all duration-300"
                         style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                         Sign In
@@ -251,7 +248,7 @@ const Index = () => {
 
                 {/* ===== SECTION 2: Emotion Check-in ===== */}
                 <section className="space-y-4">
-                  <h2 className="text-[10px] uppercase tracking-[0.25em] text-white/30"
+                  <h2 className="text-xs uppercase tracking-[0.2em] text-white/50"
                       style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
                     Current Mood
                   </h2>
