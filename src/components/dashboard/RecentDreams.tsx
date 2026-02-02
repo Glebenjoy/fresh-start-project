@@ -45,14 +45,15 @@ const RecentDreams = () => {
   if (isLoading) {
     return (
       <div className="space-y-4">
-        <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <h3 className="text-[10px] uppercase tracking-[0.25em] text-white/30" 
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
           Recent Visions
         </h3>
         <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
           {[1, 2, 3].map((i) => (
             <div
               key={i}
-              className="flex-shrink-0 w-32 h-40 rounded-2xl bg-white/[0.03] animate-pulse"
+              className="flex-shrink-0 w-28 h-36 rounded-2xl bg-white/[0.02] animate-pulse"
             />
           ))}
         </div>
@@ -63,14 +64,17 @@ const RecentDreams = () => {
   if (dreams.length === 0) {
     return (
       <div className="space-y-4">
-        <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+        <h3 className="text-[10px] uppercase tracking-[0.25em] text-white/30" 
+            style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
           Recent Visions
         </h3>
-        <div className="flex items-center justify-center py-8 px-6 rounded-2xl 
-                        bg-white/[0.02] border border-white/[0.05] border-dashed">
+        <div className="flex items-center justify-center py-10 px-6 rounded-2xl 
+                        bg-transparent border border-white/5 border-dashed">
           <div className="text-center">
-            <Sparkles className="w-6 h-6 text-violet-400/40 mx-auto mb-3" strokeWidth={1.5} />
-            <p className="text-zinc-500 text-sm italic">Your journey begins tonight.</p>
+            <Sparkles className="w-5 h-5 text-white/15 mx-auto mb-3" strokeWidth={1.5} />
+            <p className="text-white/30 text-sm italic" style={{ fontFamily: "'Cormorant', serif" }}>
+              Your journey begins tonight.
+            </p>
           </div>
         </div>
       </div>
@@ -79,16 +83,17 @@ const RecentDreams = () => {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500" style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
+      <h3 className="text-[10px] uppercase tracking-[0.25em] text-white/30" 
+          style={{ fontFamily: "'Space Grotesk', sans-serif" }}>
         Recent Visions
       </h3>
       <div className="flex gap-4 overflow-x-auto pb-2 scrollbar-hide">
         {dreams.map((dream) => (
           <div
             key={dream.id}
-            className="flex-shrink-0 w-32 rounded-2xl overflow-hidden
-                       bg-white/[0.03] backdrop-blur-md border border-white/[0.08]
-                       hover:border-white/[0.2] hover:shadow-[0_0_20px_rgba(124,58,237,0.15)]
+            className="flex-shrink-0 w-28 rounded-2xl overflow-hidden
+                       bg-transparent border border-white/5
+                       hover:border-white/15 hover:shadow-[0_0_25px_rgba(255,255,255,0.08)]
                        transition-all duration-300 cursor-pointer group"
           >
             {dream.image_url ? (
@@ -96,16 +101,17 @@ const RecentDreams = () => {
                 <img
                   src={dream.image_url}
                   alt={dream.title || "Dream"}
-                  className="w-full h-full object-cover opacity-80 group-hover:opacity-100 transition-opacity"
+                  className="w-full h-full object-cover opacity-70 group-hover:opacity-90 transition-opacity"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-                <p className="absolute bottom-2 left-2 right-2 text-xs text-white/80 truncate font-medium">
+                <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-transparent" />
+                <p className="absolute bottom-2 left-2 right-2 text-[10px] text-white/70 truncate"
+                   style={{ fontFamily: "'Cormorant', serif" }}>
                   {dream.title || "Untitled"}
                 </p>
               </div>
             ) : (
               <div className="aspect-[3/4] flex items-center justify-center">
-                <Sparkles className="w-5 h-5 text-violet-400/30" strokeWidth={1.5} />
+                <Sparkles className="w-4 h-4 text-white/15" strokeWidth={1.5} />
               </div>
             )}
           </div>
