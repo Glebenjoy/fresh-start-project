@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { User, Session } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
-import { BookOpen, Flame } from "lucide-react";
+import { BookOpen } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import CommandCenter from "@/components/dashboard/CommandCenter";
 import MoodChip from "@/components/dashboard/MoodChip";
@@ -195,86 +195,38 @@ const Index = () => {
           <div className="max-w-2xl mx-auto px-4 space-y-8">
             
             {appState === "input" && (
-              <div className="animate-fade-in space-y-8">
+              <div className="animate-fade-in flex flex-col gap-8">
                 
-                {/* ===== SECTION 1: Header ===== */}
-                <header className="flex items-center justify-between">
-                  {/* Left: Greeting */}
-                  <div>
-                    <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-tight">
-                      {greeting}, {getUserDisplayName()}
-                    </h1>
-                    <p className="text-sm text-white/40 mt-3 uppercase tracking-[0.2em] font-medium">
-                      What did you dream?
-                    </p>
-                  </div>
-
-                  {/* Right: Streak + Journal */}
-                  <div className="flex items-center gap-3">
-                    {/* Streak Indicator */}
-                    <div className="flex items-center gap-2 px-5 py-3 rounded-full
-                                    bg-white/[0.03] backdrop-blur-2xl
-                                    border border-white/[0.15]
-                                    shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]">
-                      <Flame size={16} className="text-orange-400" strokeWidth={1.5} />
-                      <span className="text-sm text-white/60 tracking-wide font-semibold">0 Days</span>
-                    </div>
-
-                    {user ? (
-                      <Link to="/journal">
-                        <button className="p-3.5 rounded-full
-                                           bg-white/[0.03] backdrop-blur-2xl
-                                           border border-white/[0.15]
-                                           shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]
-                                           text-white/60 hover:text-white hover:bg-white/[0.08] hover:border-white/[0.25]
-                                           transition-all duration-300">
-                          <BookOpen size={18} strokeWidth={1.5} />
-                        </button>
-                      </Link>
-                    ) : (
-                      <button 
-                        onClick={() => setIsAuthModalOpen(true)}
-                        className="px-5 py-3 rounded-full text-sm uppercase tracking-[0.15em] font-bold
-                                   bg-white/[0.03] backdrop-blur-2xl
-                                   border border-white/[0.15]
-                                   shadow-[inset_0_1px_0_0_rgba(255,255,255,0.1)]
-                                   text-white/60 hover:text-white hover:bg-white/[0.08] hover:border-white/[0.25]
-                                   transition-all duration-300">
-                        Sign In
-                      </button>
-                    )}
-                  </div>
+                {/* ===== SECTION 1: Header & Greeting ===== */}
+                <header className="text-left">
+                  <h1 className="text-4xl md:text-5xl font-bold text-white tracking-tight">
+                    {greeting}, {getUserDisplayName()}
+                  </h1>
+                  <p className="text-xs text-white/40 mt-4 uppercase tracking-[0.25em] font-semibold">
+                    What did you dream?
+                  </p>
                 </header>
 
-                {/* ===== SECTION 2: Emotion Check-in ===== */}
-                <section className="space-y-5">
-                  <h2 className="text-xs uppercase tracking-[0.2em] text-white/40 font-semibold">
-                    Current Mood
-                  </h2>
-                  <div className="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-                    {MOODS.map((mood) => (
-                      <MoodChip
-                        key={mood}
-                        label={mood}
-                        isSelected={selectedMood === mood}
-                        onClick={() => setSelectedMood(selectedMood === mood ? null : mood)}
-                      />
-                    ))}
-                  </div>
-                </section>
+                {/* ===== SECTION 2: Mood Selector ===== */}
+                <div className="flex flex-wrap gap-3">
+                  {MOODS.map((mood) => (
+                    <MoodChip
+                      key={mood}
+                      label={mood}
+                      isSelected={selectedMood === mood}
+                      onClick={() => setSelectedMood(selectedMood === mood ? null : mood)}
+                    />
+                  ))}
+                </div>
 
-                {/* ===== SECTION 3: Main Control Card ===== */}
-                <section>
-                  <CommandCenter 
-                    onSubmit={handleDreamSubmit} 
-                    isLoading={false} 
-                  />
-                </section>
+                {/* ===== SECTION 3: Main Input Card (Centerpiece) ===== */}
+                <CommandCenter 
+                  onSubmit={handleDreamSubmit} 
+                  isLoading={false} 
+                />
 
-                {/* ===== SECTION 4: Recent Dreams ===== */}
-                <section>
-                  <RecentDreams />
-                </section>
+                {/* ===== SECTION 4: Recent Visions ===== */}
+                <RecentDreams />
 
               </div>
             )}
